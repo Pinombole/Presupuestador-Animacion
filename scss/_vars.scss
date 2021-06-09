@@ -1,0 +1,45 @@
+$white: #FFF;
+$black: #0F0F0F;
+
+//Secciones Dark
+$violet-lgt-1: #6E6292;
+$violet-lgt-2: #D8CBFF;
+$violet-dk-1: #201B30;
+$violet-dk-2: #2C2743;
+$violet-dark-Gradient: linear-gradient(177deg, $violet-dk-1 0%, #51437d 42%, #3e335e 43%, $violet-dk-1 79%, $violet-dk-1 100%);
+
+//Secciones Light
+$salmon: #FF7A7A;
+$salmon-lgt: #FCE9E9;
+$red-dk: #831B21;
+$red-lgt: #E33D47;
+
+$red-dk-overlay: darken($red-dk, 25%);
+
+//Color Segun su Funcion
+$primary-color: $violet-dk-1;
+$secondary-color: $violet-dk-2;
+$third-color: $red-dk; 
+$bg-color-dk: $black;
+$bg-color-lgt: $white;
+$text-bg-dk-1: $violet-lgt-1;
+$text-bg-dk-2: $violet-lgt-2;
+$text-especial: $red-lgt;
+$text-bg-lgt-1: $red-dk;
+$text-bg-lgt-2: $salmon;
+
+$font: 'Kalam', cursive;
+$font-light: 300;
+$font-regular: 400;
+$font-bold: 700;
+$font-title: 'Rock Salt', cursive;
+
+$alto-header: 90px;
+$ancho: 100%;
+$ancho-menu: 250px;
+
+$custom-file-text: (
+  en: "Browse",
+  es: "Elegir"
+);
+

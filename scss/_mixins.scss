@@ -1,0 +1,358 @@
+//Mixin Media Querie
+@mixin media($size) {
+	$bp-xs:"max-width:539px";
+	$bp-sm:"min-width:576px";
+	$bp-md:"min-width:768px";
+	$bp-lg:"min-width:960px";
+	$bp-xl:"min-width:1140px";
+
+@if $size == xs {
+    @media ($bp-xs) { @content; }
+  } @else if $size == sm {
+    @media ($bp-sm) { @content; }
+  } @else if $size == md {
+    @media ($bp-md) { @content; }
+  } @else if $size == lg {
+    @media ($bp-lg) { @content; }
+  } @else if $size == xl {
+    @media ($bp-xl) { @content; }
+  }
+}
+
+//Agregado Orientación//
+@mixin orientation($direction) { 
+
+  $orientation-landscape: "(orientation:landscape)"; 
+  $orientation-portrait: "(orientation:portrait)";
+
+  @if $direction == landscape {
+    @media #{$orientation-landscape} { @content; } 
+  }
+  @if $direction == portrait {
+    @media #{$orientation-portrait} { @content; } 
+  }
+} 
+
+
+//Encabezados Secciones
+@mixin bannerSection ($alto-banner, $fondo-banner, $bg-overlay) {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	background-image: $fondo-banner;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: $ancho;
+	min-height: $alto-banner; 
+	.titleOverlay {
+		height: 100%;
+	    width: 100%;
+	    position: absolute;
+	    top: 0;
+	    background: rgba(darken($bg-overlay, 25%), 0);
+	    margin: 0;
+	    z-index: 2;
+	}
+	@include media(xl) {
+		.titleOverlay {
+		    background: rgba(darken($bg-overlay, 25%), .8);
+		    transition: all 500ms ease-in-out;
+		}
+		&:hover .titleOverlay {
+			background: rgba(darken($bg-overlay, 25%), .0);
+			transition: all 500ms ease-in-out;
+		}
+	}
+}
+
+@mixin quotesBox ($alto-quoteBox, $color-title-head, $color-quote-head, $color-firma-head, $color-title-head-inicio) {
+	width: $ancho;
+	height: $alto-quoteBox;
+	color: rgba($color-quote-head, 1);
+	margin: .5em .5em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 3;
+	font-size: 1em;
+	h1 {
+		color: rgba($color-title-head, .8);
+		text-align: center;
+	}
+	.quotesTexto {
+		width: 80%;
+		text-align: center;
+		display: inline-block;
+		line-height: 1.2em;
+	}
+	.quotesTexto--especial{
+		padding-bottom: .5em;
+		text-align: right;
+		color: $color-firma-head;
+	}
+	@include media(md) {
+		width: $ancho * .8;
+		font-size: 1.2em;
+	}
+	@include media(xl) {
+		width: $ancho * .5;
+		color: rgba($color-quote-head, .25);
+		transition: all 500ms ease-in-out;
+		font-size: 1.4em;
+		h1 {
+			font-size: 2em;
+			color: rgba($color-title-head-inicio, .5);
+			transition: all 500ms ease-in-out;
+		}
+		.quotesTexto--especial{
+			color: rgba($color-firma-head, 0);
+			transition: all 500ms ease-in-out;
+		}
+	}
+}
+
+@mixin hoverOverlay ($color-quote-head, $color-title-head, $color-firma-head) {
+	color: rgba($color-quote-head, 1);
+	transition: all 500ms ease-in-out;
+	h1 {
+		color: rgba($color-title-head, .8);
+		transition: all 500ms ease-in-out;
+	}
+	.quotesTexto--especial{
+		color: rgba($color-firma-head, 1);
+		transition: all 500ms ease-in-out;
+	}	
+}
+
+@mixin notaPieQuote ($color-notaPie-head) {
+	font-size: .8em;
+	padding-top: 1em;
+	color: $color-notaPie-head;
+	width: $ancho;
+	text-align: right;
+    position: absolute;
+    bottom: 1em;
+    right: .5em;
+}
+
+@mixin caption-img () {
+	display: flex;
+    justify-content: center;
+	height: $ancho;
+	width: $ancho;
+	background-color: transparent;
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	bottom: 0;
+    left: 0;
+    right: 0;
+	z-index: 2;
+	.captionContent {
+	    width: $ancho;
+	    color: $text-bg-dk-2;
+	    overflow: hidden;
+	    background-color: rgba($primary-color, .8);
+	    padding: 0.2em 0.5em;
+	    margin: auto 0em 0.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .raya {
+            display: inline-block; 
+            height: 1px;
+            width: 60%;
+            margin: 0 auto;
+            margin-bottom: 0.4em; 
+            background-color: $text-especial;            
+        }
+        h4 {
+            margin: 0 auto;
+            line-height: 1;
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 0 .2em;
+            @include media(md) {
+                font-size: 1.2rem;
+            }
+            @include media(xl) {
+                font-size: 1.2rem;
+            }      
+        }
+	    p{            
+	        line-height: 1;
+
+	    }
+	}
+} 
+
+@mixin portfolioItem () {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 98%;
+    padding-top: 55%;
+    margin: 0.2em auto;  
+    .caption {
+    	@include caption-img ();
+    }    
+    img {
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+    iframe{
+        display: flex;
+        height: $ancho;
+        width: $ancho;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+    span{
+        display: flex;
+        height: $ancho;
+        width: $ancho;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+    }
+}
+
+@mixin carousel-gallery {
+		 /*Carousel Multi-Item*/
+    @media (min-width: 768px) and (max-width: 991px) {
+        /* Habilita el 4to Item en col-md-4*/
+        .carousel-inner .active.col-md-4.carousel-item + .carousel-item + .carousel-item + .carousel-item {
+            position: absolute;
+            top: 0;
+            right: -33.3333%;
+            z-index: -1;
+            display: block;
+            visibility: visible;
+        }
+    }
+    @media (min-width: 576px) and (max-width: 767px) {
+        /* Habilita el 4to Item en sm if col-sm-6*/
+        .carousel-inner .active.col-sm-6.carousel-item + .carousel-item + .carousel-item {
+            position: absolute;
+            top: 0;
+            right: -50%; 
+            z-index: -1;
+            display: block;
+            visibility: visible;
+        }
+    }
+    @media (min-width: 576px) {	
+        .carousel-item {
+            margin-right: 0;
+        }	
+        
+        /* Muestra 2 items */
+        .carousel-inner .active + .carousel-item {
+            display: block;
+        }
+        .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+        .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item {
+            transition: none;
+        }
+        .carousel-inner .carousel-item-next {
+            position: relative;
+            transform: translate3d(0, 0, 0);
+        }
+        /* left or forward direction */
+        .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+        .carousel-item-next.carousel-item-left + .carousel-item,
+        .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item {
+            position: relative;
+            transform: translate3d(-100%, 0, 0);
+            visibility: visible;
+        }
+        /* farthest right hidden item must be also positioned for animations */
+        .carousel-inner .carousel-item-prev.carousel-item-right {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            display: block;
+            visibility: visible;
+        }
+        /* right or prev direction */
+        .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+        .carousel-item-prev.carousel-item-right + .carousel-item,
+        .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item {
+            position: relative;
+            transform: translate3d(100%, 0, 0);
+            visibility: visible;
+            display: block;
+            visibility: visible;
+        }
+    }
+    /* MD */
+    @media (min-width: 768px) {
+        /* Habilita el 4to Item */
+        .carousel-inner .active + .carousel-item + .carousel-item {
+            display: block;
+        }
+        .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+            transition: none;
+        }
+        .carousel-inner .carousel-item-next {
+            position: relative;
+            transform: translate3d(0, 0, 0);
+        }
+        /* left or forward direction */
+        .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+            position: relative;
+            transform: translate3d(-100%, 0, 0);
+            visibility: visible;
+        }
+        /* right or prev direction */
+        .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+            position: relative;
+            transform: translate3d(100%, 0, 0);
+            visibility: visible;
+            display: block;
+            visibility: visible;
+        }
+    }
+    /* LG */
+    @media (min-width: 991px) {
+        /* Habilita el 4to Item*/
+        .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
+            display: block;
+        }
+        .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item + .carousel-item {
+            transition: none;
+        }
+        /* Habilita el 5to Item en lg if col-lg-3 */
+        .carousel-inner .active.col-lg-3.carousel-item + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+            position: absolute;
+            top: 0;
+            right: -25%;  /*change this with javascript in the future*/
+            z-index: -1;
+            display: block;
+            visibility: visible;
+        }
+        /* left or forward direction */
+        .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+            position: relative;
+            transform: translate3d(-100%, 0, 0);
+            visibility: visible;
+        }
+        /* right or prev direction //t - previous slide direction last item animation fix */
+        .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+            position: relative;
+            transform: translate3d(100%, 0, 0);
+            visibility: visible;
+            display: block;
+            visibility: visible;
+        }
+    }
+}
+
+	

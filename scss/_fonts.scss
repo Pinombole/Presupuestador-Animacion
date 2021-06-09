@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Rock+Salt&display=swap');
+
+body {
+	font-family: $font;
+	font-weight: $font-regular;
+}
+
+h1, h2 {
+	font-family: $font-title;
+	font-weight: $font-regular;
+}
+
+h3 {
+	font-family: $font;
+	font-weight: $font-bold;
+}
+
+strong {
+	font-family: $font;
+	font-weight: $font-regular;
+}
+ 
+.type-light {
+	font-family: $font;
+	font-weight: $font-light;	
+}
+
+.type-regular {
+	font-family: $font;
+	font-weight: $font-regular;
+}
+
+.type-bold {
+	font-family: $font;
+	font-weight: $font-bold;
+}
+
+.type-center { 
+	text-align: center;
+}
+
+.type-right {
+	text-align: right;
+}
+
+.type-large-120 {
+	font-size: 120%;
+}
+
+#menu h4 {
+	font-family: $font;
+	font-weight: $font-regular;
+}
+
+#menu li {
+	font-family: $font;
+	font-weight: $font-light;
+}
+
+.filtrosNav { 
+	p {
+		font-weight: $font-bold;
+	}
+	li {
+		font-weight: $font-regular;
+	}
+}
+
