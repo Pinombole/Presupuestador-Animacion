@@ -242,20 +242,9 @@
 							<option value="Default">--</option>
 							<option value="Particular">Particular</option>
 							<option value="Pyme">Pyme</option>
-							<option value="Musica Independiente">Banda o Interprete independiente</option>
-							<option value="Musica Productora">Productora Musical</option>
-							<option value="Productora Audiovisual">Productora de Contenidos Audiovisuales</option>
-						</select>
-					</div>
-					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="alcance">¿A dónde vamos a poder ver tu video?</label>
-						<select class="custom-select" id="alcance" required>
-							<option value="Default">--</option>
-							<option value="Web">Estará en mi Web</option>
-							<option value="Youtube Redes">En Youtube y Redes Sociales</option>
-							<option value="Festivales">Festivales de Producciones Audiovisuales</option>
-							<option value="TV">Emisión TV Local</option>
-							<option value="Streaming">Emisión en Plataformas de Streaming</option>
+							<option value="Musicos">Banda o Interprete independiente</option>
+							<option value="Empresa">Empresa Líder</option>
+							<option value="Productora">Productoras Musicales o Audiovisuales</option>
 						</select>
 					</div>
 					<div class="w-100 m-0"></div>
@@ -275,8 +264,15 @@
 						<input type="text" class="form-control" id="fondos" placeholder="0" required>
 					</div>
 					<div class="col-12 col-md-5 col-xl-4 mt-1 ml-md-1 pr-md-2 justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="escenas">¿Cuántos Escenas pensás que tendría?</label>
-						<input type="text" class="form-control" id="escenas" placeholder="Opcional. Pone un número">
+						<label class="presupuestoTitle" for="tecnicaAnimacion">¿Qué técnica de Animación
+							preferis?</label>
+						<select class="custom-select" id="tecnicaAnimacion" required>
+							<option value="Default">--</option>
+							<option value="Cutout">Animación Cut-Out</option>
+							<option value="MasterController">Animación Cut-Out con Giro 360º</option>
+							<option value="Tradicional">Animación Tradicional</option>
+							<option value="Mixta">Técnicas Mixtas</option>
+						</select>
 					</div>
 					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
 						<label class="presupuestoTitle" for="estiloArte">¿Qué Estilo Artístico te gusta?</label>
@@ -356,6 +352,7 @@
 			</div>
 		</div>
 	</footer>
+	<script src="js/wow.js"></script>
 	<script src="js/scripts.js"></script>
 
 </body>
