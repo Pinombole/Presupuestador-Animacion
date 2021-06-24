@@ -40,33 +40,33 @@ class PresetAnimacion {
     }
 }
 
-class Cliente {
-    constructor(nombre, mail, pais, tipoCliente, alcance) {
-        this.nombre = nombre;
-        this.mail = mail;
-        this.pais = pais;
-        this.tipoCliente = tipoCliente;
-        this.alcance = alcance;
-    }
-    get getPais() {
-        return this.pais;
-    }
-    set setPais(nuevo) {
-        this.pais = nuevo;
-    }
-    get getTipoCliente() {
-        return this.tipoCliente;
-    }
-    set seTipoCliente(nuevo) {
-        this.tipoCliente = nuevo;
-    }
-    get getAlcance() {
-        return this.alcance;
-    }
-    set setAlcance(nuevo) {
-        this.alcance = nuevo;
-    }
-};
+// class Cliente {
+//     constructor(nombre, mail, pais, tipoCliente, alcance) {
+//         this.nombre = nombre;
+//         this.mail = mail;
+//         this.pais = pais;
+//         this.tipoCliente = tipoCliente;
+//         this.alcance = alcance;
+//     }
+//     get getPais() {
+//         return this.pais;
+//     }
+//     set setPais(nuevo) {
+//         this.pais = nuevo;
+//     }
+//     get getTipoCliente() {
+//         return this.tipoCliente;
+//     }
+//     set seTipoCliente(nuevo) {
+//         this.tipoCliente = nuevo;
+//     }
+//     get getAlcance() {
+//         return this.alcance;
+//     }
+//     set setAlcance(nuevo) {
+//         this.alcance = nuevo;
+//     }
+// };
 
 const secondsToMinutes = (segundos) => segundos / 60;
 const minutesToSeconds = (minutos) => minutos * 60;
@@ -102,7 +102,7 @@ function fracMinToMinSec(frac) {
 
 function getFormatoHora() {
     const [mins, seg] = fracMinToMinSec(duracionIngresada);
-    const formatoHora = `${mins} Minuto ${seg} Segundos`;
+    const formatoHora = `${mins} Minutos ${seg} Segundos`;
     return formatoHora;
 };
 
@@ -147,58 +147,55 @@ function precioTotalAssets(precioBase, cantidad) {
 
 function cotizadorBruto() {
     const SumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion;
-    return SumaFinal;
+    return SumaFinal.toFixed(0);
 }
 
 let duracionIngresada;
-duracionIngresada = duracionUsuario();
-const duracionFormatoHora = getFormatoHora();
+const presets = [];
 
-const presetAnimacion1 = new PresetAnimacion("Motion Graphics", 0, 0, 0, 200, duracionIngresada);
-const presetAnimacion2 = new PresetAnimacion("Rigging de Personaje", 1, 0, 0, 0, duracionIngresada);
-const presetAnimacion3 = new PresetAnimacion("Animación de Personaje", 1, 0, 0, 100, duracionIngresada);
-const presetAnimacion4 = new PresetAnimacion("Escena Animada Individual", 1, 0, 1, 200, duracionIngresada);
-const presetAnimacion5 = new PresetAnimacion("Video Explicativo Simple", 1, 0, 2, 200, duracionIngresada);
-const presetAnimacion6 = new PresetAnimacion("Video Explicativo Complejo", 3, 2, 5, 300, duracionIngresada);
-const presetAnimacion7 = new PresetAnimacion("Clip Musical (Cantante)", 1, 0, 4, 200, duracionIngresada);
-const presetAnimacion8 = new PresetAnimacion("Clip Musical (Banda)", 5, 0, 1, 200, duracionIngresada);
-const presetAnimacion9 = new PresetAnimacion("Clip Musical Complejo", 5, 2, 7, 300, duracionIngresada);
-const presetAnimacion10 = new PresetAnimacion("Musicales Que Repiten Protagonistas", 2, 2, 5, 200, duracionIngresada);
-const presetAnimacion11 = new PresetAnimacion("Capítulo de Serie Animada", 4, 4, 5, 200, duracionIngresada);
-const presetAnimacion12 = new PresetAnimacion("Cortometraje", 2, 4, 7, 300, duracionIngresada);
+presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 100, duracionIngresada));
+presets.push(new PresetAnimacion("Rigging de Personaje", 1, 0, 0, 0, duracionIngresada));
+presets.push(new PresetAnimacion("Animación de Personaje", 1, 0, 0, 75, duracionIngresada));
+presets.push(new PresetAnimacion("Escena Animada Individual", 1, 0, 1, 100, duracionIngresada));
+presets.push(new PresetAnimacion("Video Explicativo Simple", 1, 0, 2, 100, duracionIngresada));
+presets.push(new PresetAnimacion("Video Explicativo Complejo", 3, 2, 5, 150, duracionIngresada));
+presets.push(new PresetAnimacion("Clip Musical (Cantante)", 1, 0, 4, 100, duracionIngresada));
+presets.push(new PresetAnimacion("Clip Musical (Banda)", 5, 0, 1, 100, duracionIngresada));
+presets.push(new PresetAnimacion("Clip Musical Complejo", 5, 2, 7, 150, duracionIngresada));
+presets.push(new PresetAnimacion("Musicales Que Repiten Protagonistas", 2, 2, 5, 100, duracionIngresada));
+presets.push(new PresetAnimacion("Capítulo de Serie Animada", 4, 4, 5, 100, duracionIngresada));
+presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 150, duracionIngresada));
+
+console.log(presets)
 
 // Datos Cliente. Los Comento para que no sean tan invasivos los Prompts, pero cada uno equivaldría a los campos de mi formulario 
-// const nombreIngresado = prompt("Ingresa tu nombre");
+const nombreIngresado = prompt("Ingresa tu nombre");
 // const mailIngresado = prompt("Ingresa tu mail");
 // const paisIngresado = prompt("Ingresa tu pais");
-const tipoClienteIngresado = prompt("Elegí que tipo de clientes sos, escribiendo: Particular, Pyme, Empresa, Músico o Productora");
-
-
-
+const tipoClienteIngresado = prompt("Elegí que tipo de cliente sos, escribiendo: Particular, Pyme, Empresa, Músico o Productora");
 // const datosCliente = new Cliente(nombreIngresado, mailIngresado, paisIngresado, tipoClienteIngresado, alcanceIngresado);
 
 const tarifaDecidida = defineTipoTarifa(tipoClienteIngresado);
 
-//No se me ocurrió la forma de hacer lo siguiete de manera automatica de manera que me ponga todos esos Objetos Instanciados dentro.
-const presets = [presetAnimacion1, presetAnimacion2, presetAnimacion3, presetAnimacion4, presetAnimacion5, presetAnimacion6, presetAnimacion7, presetAnimacion8, presetAnimacion9, presetAnimacion10, presetAnimacion11, presetAnimacion12]
-
 const listadoPresetsAnimacion = listaNombresArrayDeObjetos(presets);
 
-const tipoProyectoIngresado = prompt(`Ingresa el Tipo de proyecto ingresando algunos de los siguientes: ${listadoPresetsAnimacion.join(", ")}`);
+const tipoProyectoIngresado = prompt(`Elegí el Tipo de proyecto ingresando algunos de los siguientes: ${listadoPresetsAnimacion.join(", ")}`);
 // const numPersonajesIngresado = Number(prompt("Ingresa la cantidad de personajes principales. Escribe ESC si quieres los valores por Defecto para"));
 // const numSecundariosIngresado = Number(prompt("Ingresa la cantidad de personajes secundarios. Escribe ESC si quieres los valores por Defecto para ${nombreIngresado}"));
 // const numFondosIngresado = Number(prompt("Ingresa la cantidad de Fondos Escribe ESC si quieres los valores por Defecto para ${nombreIngresado} "));
-
 const presetElegido = buscaObjetoEnArray(presets);
+
+duracionIngresada = duracionUsuario();
+const duracionFormatoHora = getFormatoHora();
 
 const totalMinAnimacion = multiplicar(ajustarTarifa(presetElegido.precioMinuto), duracionIngresada);
 
 let cantidadPersonajes = presetElegido.numPersonajes;
 let cantidadSecundarios = presetElegido.numSecundarios;
 let cantidadFondos = presetElegido.numFondos;
-const totalPersonajes = precioTotalAssets(100, cantidadPersonajes)
-const totalSecundarios = precioTotalAssets(80, cantidadSecundarios);
-const totalFondos = precioTotalAssets(80, cantidadFondos);
+const totalPersonajes = precioTotalAssets(50, cantidadPersonajes)
+const totalSecundarios = precioTotalAssets(50, cantidadSecundarios);
+const totalFondos = precioTotalAssets(50, cantidadFondos);
 
 console.log(totalPersonajes);
 console.log(totalSecundarios);
@@ -209,9 +206,13 @@ const brutoAnimDolar = cotizadorBruto();
 const brutoAnimPesos = conversionDolarPeso(brutoAnimDolar, 94.93);
 const precioMasIva = calcularIva(brutoAnimPesos);
 
-alert(`El costo del proyecto ${presetElegido.nombre} con ${presetElegido.numPersonajes} personajes, ${presetElegido.numSecundarios} personajes secundarios, ${presetElegido.numFondos} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimDolar} dólares o ${brutoAnimPesos} pesos. El precio con IVA es ${precioMasIva} pesos`);
-// Hasta acá el Desafio 6, incorporando Arrays y Proyecto Final Parte 1
+document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
+document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${presetElegido.numPersonajes} personajes, ${presetElegido.numSecundarios} personajes secundarios, ${presetElegido.numFondos} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimDolar} dólares o ${brutoAnimPesos} pesos.`;
+document.querySelector(".presupuestoFinal .iva").textContent = `El precio con IVA es ${precioMasIva} pesos`;
+const divHidden = document.querySelector(".presupuestoFinal")
+divHidden.classList.remove("hidden");
 
+// Hasta acá el Desafio 7, modificando el DOM
 
 // Scripts que ya tenia en mi html
 wow = new WOW(

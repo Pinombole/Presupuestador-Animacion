@@ -150,17 +150,36 @@
 	</div>
 
 	<main id="personal">
-		<!-- <div id="acerca" class="container-fluid p-0">
+		<div id="acerca" class="container-fluid p-0">
 			<div class="bloqueAcerca row no-gutters">
 				<h2 class="tituloSec col-12 mx-0">¿Quién es Pinaca?</h2>
-				<div class="parrafoAcerca col-12 col-md-9 col-lg-10"> 
-					<p>Algunos dicen que no tiene nombre. Otros dicen que tiene miles, como el Diablo. Hay algunos incrédulos que afirman que es humano y que se llama Emmanuel Carmona, pero son rápidamente desacreditados. Se sabe que Pinaca dibuja desde que tiene uso de razón. Lo que no se sabe es si todavía usa la razón. Se sospecha que adoptó el uso de la computadora tras sucumbir ante la pereza que le suponía el trabajo manual, pero hay quien afirma que, incluso al día de hoy, realiza ambas prácticas, la del dibujo tradicional y el digital, sin ninguna distinción. </p>
-					<p>Se rumorea que, paralelamente a cursar la carrera de Diseño Audiovisual (CINE) en la UBA, donde adquirió nociones de narrativa audiovisual, comenzó a hacer animaciones con el programa Flash de Adobe, actual Adobe Animate. Se sabe que en 2005 ingresó en la Productora de Animación El Mono Mario, realizando cortos de animación y en 2010, con el comienzo de las Nuevas Temporadas de dicha serie, adoptó el uso del software Toon Boom Studio, donde desarrolló un sistema de trabajo que consiste en "reciclar el rigging de los personajes" constantemente, lo que permitió realizar, durante casi 7 años, entre 5 y 7 minutos de animación semanales con un equipo de 3 personas.</p>
-					<p> Es igualmente conocido que, en 2012, asistió al Curso Anual 3D Essentials en Image Campus, donde se inició en el software 3DS Max. En el mismo establecimiento se especializó en el manejo de After Effects, el cual continuó aprendiendo por motus propio en distintos experimentos y trabajos. Hay evidencias de que, a partir del 2013, se especializó en el Toon Boom Harmony y que dicho software de animación fue utilizado en numerosos proyectos Freelance. Se rumorea que en 2017 realizó un curso de Guion en la Escuela Guionarte, orientado al Guion de Series.</p>
-					<p>Lo cierto, al menos según él, es que Pinaca es conocido como un trabajador incansable, como un realizador de fantasías, ansioso de nuevos proyectos en los cuales aventurarse. Sería sabio de tu parte, animarte a contactarlo.</p>
+				<div class="parrafoAcerca col-12 col-md-9 col-lg-10">
+					<p>Algunos dicen que no tiene nombre. Otros dicen que tiene miles, como el Diablo. Hay algunos
+						incrédulos que afirman que es humano y que se llama Emmanuel Carmona, pero son rápidamente
+						desacreditados. Se sabe que Pinaca dibuja desde que tiene uso de razón. Lo que no se sabe es si
+						todavía usa la razón. Se sospecha que adoptó el uso de la computadora tras sucumbir ante la
+						pereza que le suponía el trabajo manual, pero hay quien afirma que, incluso al día de hoy,
+						realiza ambas prácticas, la del dibujo tradicional y el digital, sin ninguna distinción. </p>
+					<p>Se rumorea que, paralelamente a cursar la carrera de Diseño Audiovisual (CINE) en la UBA, donde
+						adquirió nociones de narrativa audiovisual, comenzó a hacer animaciones con el programa Flash de
+						Adobe, actual Adobe Animate. Se sabe que en 2005 ingresó en la Productora de Animación El Mono
+						Mario, realizando cortos de animación y en 2010, con el comienzo de las Nuevas Temporadas de
+						dicha serie, adoptó el uso del software Toon Boom Studio, donde desarrolló un sistema de trabajo
+						que consiste en "reciclar el rigging de los personajes" constantemente, lo que permitió
+						realizar, durante casi 7 años, entre 5 y 7 minutos de animación semanales con un equipo de 3
+						personas.</p>
+					<p> Es igualmente conocido que, en 2012, asistió al Curso Anual 3D Essentials en Image Campus, donde
+						se inició en el software 3DS Max. En el mismo establecimiento se especializó en el manejo de
+						After Effects, el cual continuó aprendiendo por motus propio en distintos experimentos y
+						trabajos. Hay evidencias de que, a partir del 2013, se especializó en el Toon Boom Harmony y que
+						dicho software de animación fue utilizado en numerosos proyectos Freelance. Se rumorea que en
+						2017 realizó un curso de Guion en la Escuela Guionarte, orientado al Guion de Series.</p>
+					<p>Lo cierto, al menos según él, es que Pinaca es conocido como un trabajador incansable, como un
+						realizador de fantasías, ansioso de nuevos proyectos en los cuales aventurarse. Sería sabio de
+						tu parte, animarte a contactarlo.</p>
 				</div>
 			</div>
-		</div> -->
+		</div>
 
 		<!-- <div id="contacto" class="container-fluid px-0">
 			<h2 class="tituloSec mx-0">Contactame para trabajar juntos</h2>
@@ -193,7 +212,7 @@
 
 		<div id="presupuesto" class="container-fluid px-0">
 			<h2 class="tituloSec mx-0">Obtené tu Presupuesto de Animación</h2>
-			<form id="presupuesto" class="needs-validation">
+			<form id="presupuesto-form class=" needs-validation">
 				<div class="form-row no-gutters justify-content-center align-items-center mb-3 mx-2">
 					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
 						<input name="inp_nombre" type="name" class="form-control" id="Nombre"
@@ -329,6 +348,13 @@
 					</div>
 				</div>
 			</form>
+			<div class="presupuestoFinal row no-gutters justify-content-center align-items-center hidden">
+				<div class="w-100 separador m-0"></div>
+				<h5 class="col-12 col-md-10 col-xl-8 mx-0 mb-2 mt-4"></h5>
+				<p class="col-12 col-md-10 col-xl-8 mx-0 my-2"></p>
+				<p class="col-12 col-md-10 col-xl-8 mx-0 mb-4 mt-0 iva"></p>
+				<div class="w-100 separador m-0"></div>
+			</div>
 		</div>
 	</main>
 
@@ -352,6 +378,10 @@
 			</div>
 		</div>
 	</footer>
+	<script src="js/jquery-3.5.1.slim.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="js/jquery.backstretch.min.js"></script>
+	<script src="js/jquery.backstretch.js"></script>
 	<script src="js/wow.js"></script>
 	<script src="js/scripts.js"></script>
 

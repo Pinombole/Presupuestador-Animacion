@@ -51,7 +51,7 @@ strong {
   font-weight: 400; }
 
 body {
-  background-color: #0F0F0F;
+  background-color: #090411;
   color: #6E6292; }
   body p {
     margin: 0; }
@@ -546,6 +546,14 @@ body {
         #contacto .presupuestoDuracion h5, #presupuesto .presupuestoDuracion h5 {
           margin-right: 2em;
           margin-top: 1.2em; } }
+  #contacto .presupuestoFinal, #presupuesto .presupuestoFinal {
+    background-color: #090411; }
+    #contacto .presupuestoFinal h5, #presupuesto .presupuestoFinal h5 {
+      font-size: 1.3em; }
+    #contacto .presupuestoFinal p, #presupuesto .presupuestoFinal p {
+      font-size: 1.2em; }
+    #contacto .presupuestoFinal.hidden, #presupuesto .presupuestoFinal.hidden {
+      display: none; }
   #contacto .w-100.separador, #presupuesto .w-100.separador {
     margin: .5em 0;
     height: 2px;
