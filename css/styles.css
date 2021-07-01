@@ -552,8 +552,8 @@ body {
       font-size: 1.3em; }
     #contacto .presupuestoFinal p, #presupuesto .presupuestoFinal p {
       font-size: 1.2em; }
-    #contacto .presupuestoFinal.hidden, #presupuesto .presupuestoFinal.hidden {
-      display: none; }
+  #contacto .hidden, #presupuesto .hidden {
+    display: none !important; }
   #contacto .w-100.separador, #presupuesto .w-100.separador {
     margin: .5em 0;
     height: 2px;

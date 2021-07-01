@@ -1,8 +1,7 @@
 // Desafio 6, incorporando Arrays y Proyecto Final Parte 1
 class PresetAnimacion {
-    constructor(nombre, personajes = 0, secundarios = 0, fondos = 0, precio = 200, duracion) {
+    constructor(nombre, personajes = 0, secundarios = 0, fondos = 0, precio = 200) {
         this.nombre = nombre;
-        this.duracion = duracion;
         this.numPersonajes = personajes;
         this.numSecundarios = secundarios;
         this.numFondos = fondos;
@@ -40,33 +39,26 @@ class PresetAnimacion {
     }
 }
 
-// class Cliente {
-//     constructor(nombre, mail, pais, tipoCliente, alcance) {
-//         this.nombre = nombre;
-//         this.mail = mail;
-//         this.pais = pais;
-//         this.tipoCliente = tipoCliente;
-//         this.alcance = alcance;
-//     }
-//     get getPais() {
-//         return this.pais;
-//     }
-//     set setPais(nuevo) {
-//         this.pais = nuevo;
-//     }
-//     get getTipoCliente() {
-//         return this.tipoCliente;
-//     }
-//     set seTipoCliente(nuevo) {
-//         this.tipoCliente = nuevo;
-//     }
-//     get getAlcance() {
-//         return this.alcance;
-//     }
-//     set setAlcance(nuevo) {
-//         this.alcance = nuevo;
-//     }
-// };
+class Cliente {
+    constructor(nombre, mail, pais, tipoCliente) {
+        this.nombre = nombre;
+        this.mail = mail;
+        this.pais = pais;
+        this.tipoCliente = tipoCliente;
+    }
+    get getPais() {
+        return this.pais;
+    }
+    set setPais(nuevo) {
+        this.pais = nuevo;
+    }
+    get getTipoCliente() {
+        return this.tipoCliente;
+    }
+    set seTipoCliente(nuevo) {
+        this.tipoCliente = nuevo;
+    }
+};
 
 const secondsToMinutes = (segundos) => segundos / 60;
 const minutesToSeconds = (minutos) => minutos * 60;
@@ -85,31 +77,21 @@ function calcularIva(bruto) {
     return iva.toFixed(0);
 };
 
-function duracionUsuario() {
-    do {
-        duracionMin = Number(prompt("Ingrese la Duracion en Minutos"));
-        duracionSeg = Number(prompt("Ingrese la Duracion en Segundos"));
-        validacion = !isNaN(duracionMin) && !isNaN(duracionSeg);
-    } while (!validacion)
-    const duracionTotal = secondsToMinutes(duracionSeg) + duracionMin;
-    return duracionTotal;
-};
-
 function fracMinToMinSec(frac) {
     let seconds = frac * 60;
     return [Math.floor(seconds / 60), Math.floor(seconds % 60)];
 };
 
-function getFormatoHora() {
-    const [mins, seg] = fracMinToMinSec(duracionIngresada);
+function getFormatoHora(minutosDecimales) {
+    const [mins, seg] = fracMinToMinSec(minutosDecimales);
     const formatoHora = `${mins} Minutos ${seg} Segundos`;
     return formatoHora;
 };
 
-function defineTipoTarifa(cliente) {
+function defineTarifaCliente(cliente) {
     let tarifaDecidida;
-    const tarifaBase = cliente.toLowerCase() === "Particular".toLowerCase();
-    const tarifaMedia = cliente.toLowerCase() === "Pyme".toLowerCase() || cliente.toLowerCase() === "Músico".toLowerCase();
+    const tarifaBase = cliente.toLowerCase() === "Particular".toLowerCase() || cliente.toLowerCase() === "Default".toLowerCase();
+    const tarifaMedia = cliente.toLowerCase() === "Pyme".toLowerCase() || cliente.toLowerCase() === "Músicos".toLowerCase();
     const tarifaAlta = cliente.toLowerCase() === "Empresa".toLowerCase() || cliente.toLowerCase() === "Productora".toLowerCase();
 
     if (tarifaBase) {
@@ -124,6 +106,89 @@ function defineTipoTarifa(cliente) {
     return tarifaDecidida;
 }
 
+function defineTarifaTecnica(tecnica) {
+    let tarifaDecidida;
+    const tarifaBase = tecnica === "Cutout" || tecnica === "Default";
+    const tarifaMedia = tecnica === "MasterController" || tecnica === "Mixta";
+    const tarifaAlta = tecnica === "Tradicional";
+
+    if (tarifaBase) {
+        tarifaDecidida = 1;
+    } else if (tarifaMedia) {
+        tarifaDecidida = 1.5;
+    } else if (tarifaAlta) {
+        tarifaDecidida = 2;
+    } else {
+        alert("Error. Ingrese Tipo")
+    }
+    return tarifaDecidida;
+}
+
+function eligePreset() {
+    //Elige Preset
+    const buscado = selectProyecto.value;
+    const presetEncontrado = buscaObjetoEnArray(presets, buscado);
+
+    //Preset Elegido Define las opciones predeterminadas
+    seteaPredeterminados(presetEncontrado);
+    return presetEncontrado;
+}
+
+function seteaPredeterminados(preset) {
+    const personajes = preset.getNumPersonajes;
+    const secundarios = preset.getNumSecundarios;
+    const fondos = preset.getNumFondos;
+
+    if (preset.getNombrePreset === "Motion Graphics") {
+        inputPersonajes.value = 0;
+        inputSecundarios.value = 0;
+        inputFondos.value = 0;
+        inputPersonajes.parentElement.classList.add("hidden");
+        inputSecundarios.parentElement.classList.add("hidden");
+        inputFondos.parentElement.classList.add("hidden");
+        selectTecnica.parentElement.classList.add("hidden");
+        selectArte.parentElement.classList.add("hidden");
+        checkboxSerie.checked = false;
+        preguntasSerie.classList.add("hidden");
+    }
+    else if (preset.getNombrePreset === "Serie Narrativa" || preset.getNombrePreset === "Musical Serie") {
+        checkboxSerie.checked = true;
+        preguntasSerie.classList.remove("hidden");
+        inputPersonajes.parentElement.classList.remove("hidden");
+        inputSecundarios.parentElement.classList.remove("hidden");
+        inputFondos.parentElement.classList.remove("hidden");
+        selectTecnica.parentElement.classList.remove("hidden");
+        selectArte.parentElement.classList.remove("hidden");
+        inputPersonajes.value = personajes;
+        inputSecundarios.value = secundarios;
+        inputFondos.value = fondos;
+
+    }
+    else {
+        inputPersonajes.parentElement.classList.remove("hidden");
+        inputSecundarios.parentElement.classList.remove("hidden");
+        inputFondos.parentElement.classList.remove("hidden");
+        selectTecnica.parentElement.classList.remove("hidden");
+        selectArte.parentElement.classList.remove("hidden");
+        inputPersonajes.value = personajes;
+        inputSecundarios.value = secundarios;
+        inputFondos.value = fondos;
+        checkboxSerie.checked = false;
+        preguntasSerie.classList.add("hidden");
+    }
+    //El if no me queda grabado al tocar F5. ¿Habria que agregarlo al Local o al Session Storage?
+    //Otra cosa que pasa es que se me bloquea la palanquita que habilita las preguntas. 
+}
+
+function checkPreguntasSerie() {
+    if (checkboxSerie.checked = true) {
+        preguntasSerie.classList.remove("hidden");
+    }
+    else {
+        preguntasSerie.classList.add("hidden");
+    }
+}
+
 function listaNombresArrayDeObjetos(array) {
     const listado = [];
     for (let i = 0; i < array.length; i++) {
@@ -132,87 +197,172 @@ function listaNombresArrayDeObjetos(array) {
     return listado;
 }
 
-function buscaObjetoEnArray(array) {
-    const findPreset = array.find(preset => preset.nombre.toLowerCase() === tipoProyectoIngresado.toLowerCase())
+function buscaObjetoEnArray(array, buscado) {
+    const findPreset = array.find(preset => preset.nombre.toLowerCase() === buscado.toLowerCase())
     return findPreset;
 }
 
-const ajustarTarifa = precioBase => multiplicar(precioBase, tarifaDecidida);
+function ajustarTarifa(precioBase, tarifa) {
+    const ajuste = multiplicar(precioBase, tarifa);
+    return ajuste;
+}
 
-function precioTotalAssets(precioBase, cantidad) {
-    const tarifaAjustada = ajustarTarifa(precioBase)
-    const precioTotalAssets = multiplicar(tarifaAjustada, cantidad);
-    return precioTotalAssets;
+//Para sacar Total Personajes, Total Secundarios, Total Fondos. Pero pensar si no conviene tener el precio indivudual por personaje, ajustado segun clente
+function precioAssetsAjustado(precioBase) {
+    const ajusteTecnica = ajustarTarifa(precioBase, tarifaTecnica);
+    const precioAssetAjustado = ajustarTarifa(ajusteTecnica, tarifaCliente);
+    return precioAssetAjustado;
 }
 
 function cotizadorBruto() {
-    const SumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion;
-    return SumaFinal.toFixed(0);
+    const sumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion;
+    return sumaFinal.toFixed(0);
 }
 
-let duracionIngresada;
+function publicaPresupuestoHTML() {
+    let divHidden;
+    divHidden = document.querySelector(".presupuestoFinal");
+    if (paisIngresado === "Argentina" && tipoClienteIngresado !== "Particular") {
+        document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
+        document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${inputPersonajes.value} personajes, ${inputSecundarios.value} personajes secundarios, ${inputFondos.value} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimPesos} pesos.`;
+        document.querySelector(".presupuestoFinal .iva").textContent = `El precio con IVA es ${precioMasIva} pesos`;
+        divHidden.classList.remove("hidden");
+
+    }
+    else if (paisIngresado === "Argentina" && tipoClienteIngresado === "Particular") {
+        document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
+        document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${inputPersonajes.value} personajes, ${inputSecundarios.value} personajes secundarios, ${inputFondos.value} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimPesos} pesos.`;
+        document.querySelector(".presupuestoFinal .iva").classList.add("hidden");
+        divHidden.classList.remove("hidden");
+    }
+    else {
+        document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
+        document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${inputPersonajes.value} personajes, ${inputSecundarios.value} personajes secundarios, ${inputFondos.value} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimDolar} dólares.`;
+        document.querySelector(".presupuestoFinal .iva").classList.add("hidden");
+        divHidden.classList.remove("hidden");
+
+    }
+}
+let nombreIngresado;
+let mailIngresado;
+let datosCliente;
+let paisIngresado;
+let tipoClienteIngresados;
+let tipoProyectoIngresado;
+let presetElegido;
+let cantidadPersonajes;
+let cantidadSecundarios;
+let cantidadFondos;
+let precioPersonajeBase = 150;
+let precioSecundarioBase = 100;
+let precioFondoBase = 100;
+let tarifaCliente;
+let tarifaTecnica;
+let cotizacionDolarHoy = 94.93;
+let totalMinAnimacion;
+let duracionFormatoHora;
+let totalPersonajes;
+let totalSecundarios;
+let totalFondos;
+let brutoAnimDolar;
+let brutoAnimPesos;
+let precioMasIva;
 const presets = [];
 
-presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 100, duracionIngresada));
-presets.push(new PresetAnimacion("Rigging de Personaje", 1, 0, 0, 0, duracionIngresada));
-presets.push(new PresetAnimacion("Animación de Personaje", 1, 0, 0, 75, duracionIngresada));
-presets.push(new PresetAnimacion("Escena Animada Individual", 1, 0, 1, 100, duracionIngresada));
-presets.push(new PresetAnimacion("Video Explicativo Simple", 1, 0, 2, 100, duracionIngresada));
-presets.push(new PresetAnimacion("Video Explicativo Complejo", 3, 2, 5, 150, duracionIngresada));
-presets.push(new PresetAnimacion("Clip Musical (Cantante)", 1, 0, 4, 100, duracionIngresada));
-presets.push(new PresetAnimacion("Clip Musical (Banda)", 5, 0, 1, 100, duracionIngresada));
-presets.push(new PresetAnimacion("Clip Musical Complejo", 5, 2, 7, 150, duracionIngresada));
-presets.push(new PresetAnimacion("Musicales Que Repiten Protagonistas", 2, 2, 5, 100, duracionIngresada));
-presets.push(new PresetAnimacion("Capítulo de Serie Animada", 4, 4, 5, 100, duracionIngresada));
-presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 150, duracionIngresada));
+presets.push(new PresetAnimacion("Default", 0, 0, 0, 200));
+presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 250));
+presets.push(new PresetAnimacion("Rigging", 1, 0, 0, 0));
+presets.push(new PresetAnimacion("Animacion Personaje", 1, 0, 0, 150));
+presets.push(new PresetAnimacion("Escena Animada", 1, 0, 1, 200));
+presets.push(new PresetAnimacion("Explicativo Simple", 1, 0, 2, 200));
+presets.push(new PresetAnimacion("Explicativo Complejo", 3, 2, 5, 300));
+presets.push(new PresetAnimacion("Musical Cantante", 1, 0, 4, 200));
+presets.push(new PresetAnimacion("Musical Banda", 5, 0, 1, 200));
+presets.push(new PresetAnimacion("Musical Complejo", 5, 2, 7, 300));
+presets.push(new PresetAnimacion("Musical Serie", 2, 2, 5, 200));
+presets.push(new PresetAnimacion("Serie Narrativa", 4, 4, 5, 200));
+presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 300));
 
-console.log(presets)
+const presupuestoForm = document.querySelector('#presupuesto-form');
+const inputNombre = document.querySelector('#inputNombre');
+const inputMail = document.querySelector('#inputMail');
+const inputPais = document.querySelector('#inputPais');
+const inputPersonajes = document.querySelector('#inputPersonajes');
+const inputSecundarios = document.querySelector('#inputSecundarios');
+const inputFondos = document.querySelector('#inputFondos');
+const inputMinutos = document.querySelector('#inputMin');
+const inputSegundos = document.querySelector('#inputSeg');
+const selectProyecto = document.querySelector('#selectProyecto');
+const selectTipoCliente = document.querySelector('#selectTipoCliente');
+const selectTecnica = document.querySelector('#selectTecnica');
+const selectArte = document.querySelector('#selectArte');
+const checkboxSerie = document.querySelector('#activaSerie');
+const preguntasSerie = document.querySelector('.preguntasSerie');
 
-// Datos Cliente. Los Comento para que no sean tan invasivos los Prompts, pero cada uno equivaldría a los campos de mi formulario 
-const nombreIngresado = prompt("Ingresa tu nombre");
-// const mailIngresado = prompt("Ingresa tu mail");
-// const paisIngresado = prompt("Ingresa tu pais");
-const tipoClienteIngresado = prompt("Elegí que tipo de cliente sos, escribiendo: Particular, Pyme, Empresa, Músico o Productora");
-// const datosCliente = new Cliente(nombreIngresado, mailIngresado, paisIngresado, tipoClienteIngresado, alcanceIngresado);
+//Event Listeners
+presupuestoForm.addEventListener("submit", cotizaAnimacion);
+selectProyecto.addEventListener("change", eligePreset);
+checkboxSerie.addEventListener("change", checkPreguntasSerie);
 
-const tarifaDecidida = defineTipoTarifa(tipoClienteIngresado);
+function cotizaAnimacion(e) {
+    e.preventDefault();
 
-const listadoPresetsAnimacion = listaNombresArrayDeObjetos(presets);
+    nombreIngresado = inputNombre.value;
+    mailIngresado = inputMail.value;
+    paisIngresado = inputPais.value;
+    tipoClienteIngresado = selectTipoCliente.value;
 
-const tipoProyectoIngresado = prompt(`Elegí el Tipo de proyecto ingresando algunos de los siguientes: ${listadoPresetsAnimacion.join(", ")}`);
-// const numPersonajesIngresado = Number(prompt("Ingresa la cantidad de personajes principales. Escribe ESC si quieres los valores por Defecto para"));
-// const numSecundariosIngresado = Number(prompt("Ingresa la cantidad de personajes secundarios. Escribe ESC si quieres los valores por Defecto para ${nombreIngresado}"));
-// const numFondosIngresado = Number(prompt("Ingresa la cantidad de Fondos Escribe ESC si quieres los valores por Defecto para ${nombreIngresado} "));
-const presetElegido = buscaObjetoEnArray(presets);
+    datosCliente = new Cliente(nombreIngresado, mailIngresado, paisIngresado, tipoClienteIngresado);
+    // Acá mandaría el dato de cliente al Storage ¿?
 
-duracionIngresada = duracionUsuario();
-const duracionFormatoHora = getFormatoHora();
+    presetElegido = buscaObjetoEnArray(presets, selectProyecto.value);
+    console.log(presetElegido);
 
-const totalMinAnimacion = multiplicar(ajustarTarifa(presetElegido.precioMinuto), duracionIngresada);
+    //Usuario Modifica Cantidades
+    cantidadPersonajes = inputPersonajes.value;
+    cantidadSecundarios = inputSecundarios.value;
+    cantidadFondos = inputFondos.value;
 
-let cantidadPersonajes = presetElegido.numPersonajes;
-let cantidadSecundarios = presetElegido.numSecundarios;
-let cantidadFondos = presetElegido.numFondos;
-const totalPersonajes = precioTotalAssets(50, cantidadPersonajes)
-const totalSecundarios = precioTotalAssets(50, cantidadSecundarios);
-const totalFondos = precioTotalAssets(50, cantidadFondos);
+    const tecnicaIngresada = selectTecnica.value;
+    const estiloArteIngresado = selectArte.value;
 
-console.log(totalPersonajes);
-console.log(totalSecundarios);
-console.log(totalFondos);
-console.log(totalMinAnimacion);
+    const duracionMin = Number(inputMinutos.value);
+    const duracionSeg = Number(inputSegundos.value);
+    const duracionIngresada = secondsToMinutes(duracionSeg) + duracionMin;
+    duracionFormatoHora = getFormatoHora(duracionIngresada);
 
-const brutoAnimDolar = cotizadorBruto();
-const brutoAnimPesos = conversionDolarPeso(brutoAnimDolar, 94.93);
-const precioMasIva = calcularIva(brutoAnimPesos);
+    tarifaCliente = defineTarifaCliente(tipoClienteIngresado);
+    console.log(tarifaCliente)
+    tarifaTecnica = defineTarifaTecnica(tecnicaIngresada);
+    console.log(tarifaTecnica)
+    //Empezar a Cotizar recordando que ahora la tarifaDecidida se llama tarifaCliente  
+    //Se van aplicar individualmente a PrecioMinuto de animacion sacado del presetElegido. Precio por Pesonajes y Fondos;
+    const precioMinutoAnim = precioAssetsAjustado(presetElegido.precioMinuto);
+    const precioCadaPersonaje = precioAssetsAjustado(precioPersonajeBase);
+    const precioCadaSecundario = precioAssetsAjustado(precioSecundarioBase);
+    const precioCadaFondo = precioAssetsAjustado(precioFondoBase);
 
-document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
-document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${presetElegido.numPersonajes} personajes, ${presetElegido.numSecundarios} personajes secundarios, ${presetElegido.numFondos} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimDolar} dólares o ${brutoAnimPesos} pesos.`;
-document.querySelector(".presupuestoFinal .iva").textContent = `El precio con IVA es ${precioMasIva} pesos`;
-const divHidden = document.querySelector(".presupuestoFinal")
-divHidden.classList.remove("hidden");
+    totalMinAnimacion = multiplicar(precioMinutoAnim, duracionIngresada);
+    console.log(`Total Minuto: ${totalMinAnimacion}`);
+    totalPersonajes = multiplicar(precioCadaPersonaje, cantidadPersonajes)
+    console.log(`Total Personaje: ${totalPersonajes}`);
+    totalSecundarios = multiplicar(precioCadaSecundario, cantidadSecundarios);
+    console.log(`Total Secundario: ${totalSecundarios}`);
+    totalFondos = multiplicar(precioCadaFondo, cantidadFondos);
+    console.log(`Total Fondo: ${totalFondos}`);
 
-// Hasta acá el Desafio 7, modificando el DOM
+    brutoAnimDolar = cotizadorBruto();
+    brutoAnimPesos = conversionDolarPeso(brutoAnimDolar, cotizacionDolarHoy);
+    precioMasIva = calcularIva(brutoAnimPesos);
+    console.log(`Total Dolar: ${brutoAnimDolar}`);
+
+    publicaPresupuestoHTML();
+}
+
+
+
+
+// Hasta acá el Desafio 8, Eventos
 
 // Scripts que ya tenia en mi html
 wow = new WOW(

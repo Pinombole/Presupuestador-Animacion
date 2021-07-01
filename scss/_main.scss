@@ -604,10 +604,9 @@ body {
 		p {
 			font-size: 1.2em
 		}
-		&.hidden {
-			display: none;
-		}
-
+	}
+	.hidden {
+		display: none !important;
 	}
 	.w-100.separador {
 		margin: .5em 0;

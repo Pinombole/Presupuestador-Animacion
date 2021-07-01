@@ -150,7 +150,7 @@
 	</div>
 
 	<main id="personal">
-		<div id="acerca" class="container-fluid p-0">
+		<!-- <div id="acerca" class="container-fluid p-0">
 			<div class="bloqueAcerca row no-gutters">
 				<h2 class="tituloSec col-12 mx-0">¿Quién es Pinaca?</h2>
 				<div class="parrafoAcerca col-12 col-md-9 col-lg-10">
@@ -179,7 +179,7 @@
 						tu parte, animarte a contactarlo.</p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- <div id="contacto" class="container-fluid px-0">
 			<h2 class="tituloSec mx-0">Contactame para trabajar juntos</h2>
@@ -212,19 +212,30 @@
 
 		<div id="presupuesto" class="container-fluid px-0">
 			<h2 class="tituloSec mx-0">Obtené tu Presupuesto de Animación</h2>
-			<form id="presupuesto-form class=" needs-validation">
+			<form id="presupuesto-form" class="needs-validation">
 				<div class="form-row no-gutters justify-content-center align-items-center mb-3 mx-2">
 					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
-						<input name="inp_nombre" type="name" class="form-control" id="Nombre"
+						<input name="inp_nombre" type="name" class="form-control" id="inputNombre"
 							placeholder="¿Cómo te llamas?" required>
 					</div>
 					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
-						<input name="inp_email" type="email" class="form-control" id="Mail" placeholder="Decime tu Mail"
-							required>
+						<input name="inp_email" type="email" class="form-control" id="inputMail"
+							placeholder="Ingresa tu Mail" required>
 					</div>
 					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
-						<input name="inp_lugar" type="lugar" class="form-control" id="Lugar" placeholder="¿Dónde vivis?"
-							required>
+						<input name="inp_pais" type="pais" class="form-control" id="inputPais"
+							placeholder="Ingresa tu Pais" required>
+					</div>
+					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
+						<label class="presupuestoTitle" for="tipoCliente">Elegí tu Categoría</label>
+						<select class="custom-select" id="selectTipoCliente" required>
+							<option value="Default">--</option>
+							<option value="Particular">Particular</option>
+							<option value="Pyme">Pyme</option>
+							<option value="Músicos">Banda o Interprete independiente</option>
+							<option value="Empresa">Empresa Líder</option>
+							<option value="Productora">Productoras Musicales o Audiovisuales</option>
+						</select>
 					</div>
 					<div class="w-100 mt-2"></div>
 					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
@@ -241,61 +252,53 @@
 					<div class="w-100 mt-2"></div>
 					<div class="col-12 col-md-10 col-xl-8 mb-2 row justify-content-between no-gutters">
 						<label class="mr-sm-2 sr-only" for="presetProyecto">Proyecto</label>
-						<select class="custom-select" id="presetProyecto">
+						<select class="custom-select" id="selectProyecto">
 							<option value="Default">¿Qué proyecto tenés en mente?</option>
 							<option value="Motion Graphics">Motion Graphics - Infographics</option>
+							<option value="Rigging">Rigging de Personaje Cut-Out</option>
+							<option value="Animacion Personaje">Animación de Personaje Cut-Out</option>
+							<option value="Escena Animada">Escena Animada Individual</option>
 							<option value="Explicativo Simple">Video Explicativo Simple</option>
-							<option value="Explicativo Complejo">Video Explicativo (con Escenas Narrativas)</option>
-							<option value="Clip Musical Simple">Clip Musical Simple (cantante o banda)</option>
-							<option value="Clip Musical Simple">Clip Musical Complejo (con Escenas Narrativas)</option>
-							<option value="Clip Musical Serie">Clip Musical con Personajes Recurrentes</option>
-							<option value="Serie Animada">Serie Animada con Personajes Recurrentes</option>
-							<option value="Serie Unitaria">Serie Animada Unitaria (distintos personajes)</option>
-							<option value="Corto Cut-Out">Corto Animación Cut-Out</option>
-							<option value="Corto Mixto">Corto Animación Tradicional o Mixta</option>
+							<option value="Explicativo Complejo">Video Explicativo con Escenas Narrativas</option>
+							<option value="Musical Cantante">Clip Musical con intérprete cantando</option>
+							<option value="Musical Banda">Clip Musical con Banda tocando</option>
+							<option value="Musical Complejo">Clip Musical con Escenas Narrativas</option>
+							<option value="Musical Serie">Clip Musical con Personajes Recurrentes</option>
+							<option value="Serie Narrativa">Serie Animada con Personajes Recurrentes</option>
+							<option value="Cortometraje">Cortometraje o Capítulo de Serie de Unitarios</option>
 						</select>
 					</div>
-					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="tipoCliente">Elegí tu Categoría</label>
-						<select class="custom-select" id="tipoCliente" required>
-							<option value="Default">--</option>
-							<option value="Particular">Particular</option>
-							<option value="Pyme">Pyme</option>
-							<option value="Musicos">Banda o Interprete independiente</option>
-							<option value="Empresa">Empresa Líder</option>
-							<option value="Productora">Productoras Musicales o Audiovisuales</option>
-						</select>
-					</div>
+
 					<div class="w-100 m-0"></div>
-					<div class="col-12 col-md-5 col-xl-4 mt-1 mr-md-1 pl-md-2 justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="personajesPrincipales">¿Cuántos personajes principales
-							tiene?</label>
-						<input type="text" class="form-control" id="personajesPrincipales" placeholder="0" required>
-					</div>
-					<div class="col-12 col-md-5 col-xl-4 mt-1 ml-md-1 pr-md-2 justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="personajesSecundarios">¿Cuántos personajes
-							secundarios?</label>
-						<input type="text" class="form-control" id="personajesSecundarios" placeholder="0" required>
+					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
+						<div class="col-12 col-md-4 col-xl-4 pr-md-2 mt-1 no-gutters">
+							<label class="presupuestoTitle" for="personajesPrincipales">Número de Protagonistas</label>
+							<input type="text" class="form-control" id="inputPersonajes" placeholder="0" required>
+						</div>
+						<div class="col-12 col-md-4 col-xl-4 mt-1 px-md-1 no-gutters">
+							<label class="presupuestoTitle" for="personajesSecundarios">Número de Secundarios</label>
+							<input type="text" class="form-control" id="inputSecundarios" placeholder="0" required>
+						</div>
+						<div class="col-12 col-md-4 col-xl-4 pl-md-2 mt-1 no-gutters">
+							<label class="presupuestoTitle" for="fondos">Número de Fondos</label>
+							<input type="text" class="form-control" id="inputFondos" placeholder="0" required>
+						</div>
 					</div>
 					<div class="w-100"></div>
-					<div class="col-12 col-md-5 col-xl-4 mt-1 mr-md-1 pl-md-2 justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="fondos">¿Cuántos Fondos?</label>
-						<input type="text" class="form-control" id="fondos" placeholder="0" required>
-					</div>
-					<div class="col-12 col-md-5 col-xl-4 mt-1 ml-md-1 pr-md-2 justify-content-between no-gutters">
+					<div class="col-12 col-md-5 col-xl-4 mt-1 pr-md-2 justify-content-between no-gutters">
 						<label class="presupuestoTitle" for="tecnicaAnimacion">¿Qué técnica de Animación
 							preferis?</label>
-						<select class="custom-select" id="tecnicaAnimacion" required>
+						<select class="custom-select" id="selectTecnica" required>
 							<option value="Default">--</option>
 							<option value="Cutout">Animación Cut-Out</option>
 							<option value="MasterController">Animación Cut-Out con Giro 360º</option>
-							<option value="Tradicional">Animación Tradicional</option>
+							<option value="Tradicional">Animación Tradicional Cuadro a Cuadro</option>
 							<option value="Mixta">Técnicas Mixtas</option>
 						</select>
 					</div>
-					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
+					<div class="ccol-12 col-md-5 col-xl-4 mt-1 pl-md-2 justify-content-between no-gutters">
 						<label class="presupuestoTitle" for="estiloArte">¿Qué Estilo Artístico te gusta?</label>
-						<select class="custom-select" id="estiloArte" required>
+						<select class="custom-select" id="selectArte" required>
 							<option value="Default">--</option>
 							<option value="Cartoon">Cartoon Infantil</option>
 							<option value="Anime">Anime</option>
@@ -310,12 +313,12 @@
 						<div class="d-flex no-gutters justify-content-center position-relative">
 							<div class="inputDuracion">
 								<label for="duracionMinutos">Minutos</label>
-								<input type="text" class="form-control" id="escenas" value="0" required>
+								<input type="text" class="form-control" id="inputMin" value="0" required>
 							</div>
 							<p class="puntosDuracion">:</p>
 							<div class="inputDuracion">
 								<label for="duracionMinutos">Segundos</label>
-								<input type="text" class="form-control" id="escenas" value="0" required>
+								<input type="text" class="form-control" id="inputSeg" value="0" required>
 							</div>
 						</div>
 					</div>
@@ -328,21 +331,22 @@
 						</div>
 					</div>
 					<div class="w-100 m-0"></div>
-					<div class="preguntasSerie col-12 col-md-10 col-xl-8 row py-1 justify-content-between no-gutters">
+					<div
+						class="preguntasSerie col-12 col-md-10 col-xl-8 row py-1 justify-content-between no-gutters hidden">
 						<div class="col-6 row p-0 m-0 pr-2">
 							<label class="presupuestoTitle" for="personajesRecurrentes">¿Cuántos personajes
 								recurrentes?</label>
-							<input type="text" class="form-control" id="personajesRecurrentes" placeholder="0" required>
+							<input type="text" class="form-control" id="personajesRecurrentes" placeholder="0">
 						</div>
 						<div class="col-6 row p-0 m-0 pl-2">
 							<label class="presupuestoTitle" for="capitulos">¿Cuántos capítulos con esos
 								personajes?</label>
-							<input type="text" class="form-control" id="capitulos" placeholder="0" required>
+							<input type="text" class="form-control" id="capitulos" placeholder="0">
 						</div>
 					</div>
 					<div class="w-100 separador"></div>
 					<div class="col-12 col-md-10 col-xl-8 mt-2">
-						<input class="btn btn-outline-danger btn-lg pull-right" type="button"
+						<input class="btn btn-outline-danger btn-lg pull-right" type="submit"
 							value="Obtené tu Presupuesto">
 						<input class="btn btn-outline-danger btn-lg pull-right mr-2" type="reset" value="Reseteá">
 					</div>
