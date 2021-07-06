@@ -27,6 +27,9 @@ strong {
   font-family: "Kalam", cursive;
   font-weight: 700; }
 
+.type-left {
+  text-align: left; }
+
 .type-center {
   text-align: center; }
 
@@ -546,18 +549,65 @@ body {
         #contacto .presupuestoDuracion h5, #presupuesto .presupuestoDuracion h5 {
           margin-right: 2em;
           margin-top: 1.2em; } }
-  #contacto .presupuestoFinal, #presupuesto .presupuestoFinal {
-    background-color: #090411; }
-    #contacto .presupuestoFinal h5, #presupuesto .presupuestoFinal h5 {
-      font-size: 1.3em; }
-    #contacto .presupuestoFinal p, #presupuesto .presupuestoFinal p {
-      font-size: 1.2em; }
   #contacto .hidden, #presupuesto .hidden {
     display: none !important; }
   #contacto .w-100.separador, #presupuesto .w-100.separador {
     margin: .5em 0;
     height: 2px;
     background-color: #d43039; }
+  #contacto #modal-Presupuesto .close, #presupuesto #modal-Presupuesto .close {
+    position: absolute;
+    right: 0;
+    top: -35px;
+    z-index: 999;
+    font-size: 3rem;
+    font-weight: normal;
+    color: #E33D47;
+    opacity: 2;
+    text-shadow: 0 1px 0 #591216; }
+  #contacto #modal-Presupuesto .modal-body, #presupuesto #modal-Presupuesto .modal-body {
+    height: 80vh; }
+  #contacto #modal-Presupuesto .modal-footer, #presupuesto #modal-Presupuesto .modal-footer {
+    background-color: #2C2743; }
+  #contacto #modal-Presupuesto .presupuestoFinal, #presupuesto #modal-Presupuesto .presupuestoFinal {
+    width: 100%;
+    color: #090411;
+    background-color: #FFF;
+    padding: 2em; }
+    #contacto #modal-Presupuesto .presupuestoFinal .datosProyecto, #presupuesto #modal-Presupuesto .presupuestoFinal .datosProyecto {
+      font-size: .8em;
+      line-height: 1.2;
+      margin: .5em; }
+      #contacto #modal-Presupuesto .presupuestoFinal .datosProyecto span, #presupuesto #modal-Presupuesto .presupuestoFinal .datosProyecto span {
+        font-weight: 700; }
+    #contacto #modal-Presupuesto .presupuestoFinal .headerTabla, #presupuesto #modal-Presupuesto .presupuestoFinal .headerTabla {
+      font-size: 1.1em;
+      line-height: 1;
+      padding: .6em .5em .4em .5em;
+      display: grid;
+      grid-template-columns: 6fr 1fr 1fr;
+      justify-items: stretch;
+      align-items: center;
+      text-align: center;
+      color: #FFF;
+      background-color: #831B21; }
+    #contacto #modal-Presupuesto .presupuestoFinal .filaTabla, #presupuesto #modal-Presupuesto .presupuestoFinal .filaTabla {
+      font-size: 1em;
+      line-height: 1;
+      padding: .6em .5em .4em .5em;
+      display: grid;
+      grid-template-columns: 6fr 1fr 1fr;
+      justify-items: stretch;
+      align-items: center;
+      text-align: center;
+      border-bottom: solid 2px #090411; }
+      #contacto #modal-Presupuesto .presupuestoFinal .filaTabla.filaSubtotal, #contacto #modal-Presupuesto .presupuestoFinal .filaTabla.filaIva, #contacto #modal-Presupuesto .presupuestoFinal .filaTabla.filaTotal, #presupuesto #modal-Presupuesto .presupuestoFinal .filaTabla.filaSubtotal, #presupuesto #modal-Presupuesto .presupuestoFinal .filaTabla.filaIva, #presupuesto #modal-Presupuesto .presupuestoFinal .filaTabla.filaTotal {
+        border-bottom: solid 0px #090411;
+        font-weight: 700; }
+    #contacto #modal-Presupuesto .presupuestoFinal h5, #presupuesto #modal-Presupuesto .presupuestoFinal h5 {
+      font-size: 1.3em; }
+    #contacto #modal-Presupuesto .presupuestoFinal p, #presupuesto #modal-Presupuesto .presupuestoFinal p {
+      font-size: 1.2em; }
 
 .btn {
   cursor: pointer; }

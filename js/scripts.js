@@ -1,4 +1,4 @@
-// Desafio 6, incorporando Arrays y Proyecto Final Parte 1
+// Constuctores
 class PresetAnimacion {
     constructor(nombre, personajes = 0, secundarios = 0, fondos = 0, precio = 200) {
         this.nombre = nombre;
@@ -60,6 +60,79 @@ class Cliente {
     }
 };
 
+//Variables
+let nombreIngresado;
+let mailIngresado;
+let datosCliente;
+let paisIngresado;
+let tipoClienteIngresados;
+let tipoProyectoIngresado;
+let presetElegido;
+let cantidadPersonajes;
+let cantidadSecundarios;
+let cantidadFondos;
+let tecnicaIngresada;
+let estiloArteIngresado;
+let precioPersonajeBase = 150;
+let precioSecundarioBase = 100;
+let precioFondoBase = 100;
+let tarifaCliente;
+let tarifaTecnica;
+let cotizacionDolarHoy = 94.93;
+let totalMinAnimacion;
+let duracionFormatoHora;
+let totalPersonajes;
+let totalSecundarios;
+let totalFondos;
+let brutoAnimDolar;
+let brutoAnimPesos;
+let precioMasIva;
+const presets = [];
+
+presets.push(new PresetAnimacion("Default", 0, 0, 0, 200));
+presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 600));
+presets.push(new PresetAnimacion("Rigging", 1, 0, 0, 0));
+presets.push(new PresetAnimacion("Animacion Personaje", 1, 0, 0, 150));
+presets.push(new PresetAnimacion("Escena Animada", 1, 0, 1, 200));
+presets.push(new PresetAnimacion("Explicativo Simple", 1, 0, 2, 200));
+presets.push(new PresetAnimacion("Explicativo Complejo", 3, 2, 5, 300));
+presets.push(new PresetAnimacion("Musical Cantante", 1, 0, 4, 200));
+presets.push(new PresetAnimacion("Musical Banda", 5, 0, 1, 200));
+presets.push(new PresetAnimacion("Musical Complejo", 5, 2, 7, 300));
+presets.push(new PresetAnimacion("Musical Serie", 2, 2, 5, 200));
+presets.push(new PresetAnimacion("Serie Narrativa", 4, 4, 5, 200));
+presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 300));
+
+const presupuestoForm = document.querySelector('#presupuesto-form');
+const inputNombre = document.querySelector('#inputNombre');
+const inputMail = document.querySelector('#inputMail');
+const inputPais = document.querySelector('#inputPais');
+const inputPersonajes = document.querySelector('#inputPersonajes');
+const inputSecundarios = document.querySelector('#inputSecundarios');
+const inputFondos = document.querySelector('#inputFondos');
+const inputMinutos = document.querySelector('#inputMin');
+const inputSegundos = document.querySelector('#inputSeg');
+const selectProyecto = document.querySelector('#selectProyecto');
+const selectTipoCliente = document.querySelector('#selectTipoCliente');
+const selectTecnica = document.querySelector('#selectTecnica');
+const selectArte = document.querySelector('#selectArte');
+const preguntasSerie = document.querySelectorAll('.preguntasSerie');
+const botonImprimir = document.querySelector('.print');
+const datosProyecto = document.querySelector('.datosProyecto');
+const filaProtagonistas = document.querySelector('.filaProtas');
+const filaSecundarios = document.querySelector('.filaSecund');
+const filaFondos = document.querySelector('.filaFondos');
+const filaMinutos = document.querySelector('.filaMin');
+const filaSubtotal = document.querySelector('.filaSubtotal');
+const filaIva = document.querySelector('.filaIva');
+const filaTotal = document.querySelector('.filaTotal');
+
+//Event Listeners
+presupuestoForm.addEventListener("submit", cotizaAnimacion);
+selectProyecto.addEventListener("change", eligePreset);
+botonImprimir.addEventListener("click", imprimePresupuesto)
+
+//Funciones
 const secondsToMinutes = (segundos) => segundos / 60;
 const minutesToSeconds = (minutos) => minutos * 60;
 const sumar = (x, y) => x + y;
@@ -148,12 +221,10 @@ function seteaPredeterminados(preset) {
         inputFondos.parentElement.classList.add("hidden");
         selectTecnica.parentElement.classList.add("hidden");
         selectArte.parentElement.classList.add("hidden");
-        checkboxSerie.checked = false;
-        preguntasSerie.classList.add("hidden");
+        preguntasSerie.forEach((node) => { node.classList.add("hidden") })
     }
     else if (preset.getNombrePreset === "Serie Narrativa" || preset.getNombrePreset === "Musical Serie") {
-        checkboxSerie.checked = true;
-        preguntasSerie.classList.remove("hidden");
+        preguntasSerie.forEach((node) => { node.classList.remove("hidden") });
         inputPersonajes.parentElement.classList.remove("hidden");
         inputSecundarios.parentElement.classList.remove("hidden");
         inputFondos.parentElement.classList.remove("hidden");
@@ -162,7 +233,6 @@ function seteaPredeterminados(preset) {
         inputPersonajes.value = personajes;
         inputSecundarios.value = secundarios;
         inputFondos.value = fondos;
-
     }
     else {
         inputPersonajes.parentElement.classList.remove("hidden");
@@ -173,21 +243,12 @@ function seteaPredeterminados(preset) {
         inputPersonajes.value = personajes;
         inputSecundarios.value = secundarios;
         inputFondos.value = fondos;
-        checkboxSerie.checked = false;
-        preguntasSerie.classList.add("hidden");
+        preguntasSerie.forEach((node) => { node.classList.add("hidden") })
     }
+
     //El if no me queda grabado al tocar F5. ¿Habria que agregarlo al Local o al Session Storage?
-    //Otra cosa que pasa es que se me bloquea la palanquita que habilita las preguntas. 
 }
 
-function checkPreguntasSerie() {
-    if (checkboxSerie.checked = true) {
-        preguntasSerie.classList.remove("hidden");
-    }
-    else {
-        preguntasSerie.classList.add("hidden");
-    }
-}
 
 function listaNombresArrayDeObjetos(array) {
     const listado = [];
@@ -215,94 +276,10 @@ function precioAssetsAjustado(precioBase) {
 }
 
 function cotizadorBruto() {
-    const sumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion;
+    let sumaFinal;
+    sumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion;
     return sumaFinal.toFixed(0);
 }
-
-function publicaPresupuestoHTML() {
-    let divHidden;
-    divHidden = document.querySelector(".presupuestoFinal");
-    if (paisIngresado === "Argentina" && tipoClienteIngresado !== "Particular") {
-        document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
-        document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${inputPersonajes.value} personajes, ${inputSecundarios.value} personajes secundarios, ${inputFondos.value} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimPesos} pesos.`;
-        document.querySelector(".presupuestoFinal .iva").textContent = `El precio con IVA es ${precioMasIva} pesos`;
-        divHidden.classList.remove("hidden");
-
-    }
-    else if (paisIngresado === "Argentina" && tipoClienteIngresado === "Particular") {
-        document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
-        document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${inputPersonajes.value} personajes, ${inputSecundarios.value} personajes secundarios, ${inputFondos.value} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimPesos} pesos.`;
-        document.querySelector(".presupuestoFinal .iva").classList.add("hidden");
-        divHidden.classList.remove("hidden");
-    }
-    else {
-        document.querySelector(".presupuestoFinal h5").textContent = `¡Hola ${nombreIngresado}!`;
-        document.querySelector(".presupuestoFinal p").textContent = `Tu proyecto ${presetElegido.nombre} con ${inputPersonajes.value} personajes, ${inputSecundarios.value} personajes secundarios, ${inputFondos.value} Fondos y una duración de ${duracionFormatoHora} cuesta ${brutoAnimDolar} dólares.`;
-        document.querySelector(".presupuestoFinal .iva").classList.add("hidden");
-        divHidden.classList.remove("hidden");
-
-    }
-}
-let nombreIngresado;
-let mailIngresado;
-let datosCliente;
-let paisIngresado;
-let tipoClienteIngresados;
-let tipoProyectoIngresado;
-let presetElegido;
-let cantidadPersonajes;
-let cantidadSecundarios;
-let cantidadFondos;
-let precioPersonajeBase = 150;
-let precioSecundarioBase = 100;
-let precioFondoBase = 100;
-let tarifaCliente;
-let tarifaTecnica;
-let cotizacionDolarHoy = 94.93;
-let totalMinAnimacion;
-let duracionFormatoHora;
-let totalPersonajes;
-let totalSecundarios;
-let totalFondos;
-let brutoAnimDolar;
-let brutoAnimPesos;
-let precioMasIva;
-const presets = [];
-
-presets.push(new PresetAnimacion("Default", 0, 0, 0, 200));
-presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 250));
-presets.push(new PresetAnimacion("Rigging", 1, 0, 0, 0));
-presets.push(new PresetAnimacion("Animacion Personaje", 1, 0, 0, 150));
-presets.push(new PresetAnimacion("Escena Animada", 1, 0, 1, 200));
-presets.push(new PresetAnimacion("Explicativo Simple", 1, 0, 2, 200));
-presets.push(new PresetAnimacion("Explicativo Complejo", 3, 2, 5, 300));
-presets.push(new PresetAnimacion("Musical Cantante", 1, 0, 4, 200));
-presets.push(new PresetAnimacion("Musical Banda", 5, 0, 1, 200));
-presets.push(new PresetAnimacion("Musical Complejo", 5, 2, 7, 300));
-presets.push(new PresetAnimacion("Musical Serie", 2, 2, 5, 200));
-presets.push(new PresetAnimacion("Serie Narrativa", 4, 4, 5, 200));
-presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 300));
-
-const presupuestoForm = document.querySelector('#presupuesto-form');
-const inputNombre = document.querySelector('#inputNombre');
-const inputMail = document.querySelector('#inputMail');
-const inputPais = document.querySelector('#inputPais');
-const inputPersonajes = document.querySelector('#inputPersonajes');
-const inputSecundarios = document.querySelector('#inputSecundarios');
-const inputFondos = document.querySelector('#inputFondos');
-const inputMinutos = document.querySelector('#inputMin');
-const inputSegundos = document.querySelector('#inputSeg');
-const selectProyecto = document.querySelector('#selectProyecto');
-const selectTipoCliente = document.querySelector('#selectTipoCliente');
-const selectTecnica = document.querySelector('#selectTecnica');
-const selectArte = document.querySelector('#selectArte');
-const checkboxSerie = document.querySelector('#activaSerie');
-const preguntasSerie = document.querySelector('.preguntasSerie');
-
-//Event Listeners
-presupuestoForm.addEventListener("submit", cotizaAnimacion);
-selectProyecto.addEventListener("change", eligePreset);
-checkboxSerie.addEventListener("change", checkPreguntasSerie);
 
 function cotizaAnimacion(e) {
     e.preventDefault();
@@ -323,8 +300,8 @@ function cotizaAnimacion(e) {
     cantidadSecundarios = inputSecundarios.value;
     cantidadFondos = inputFondos.value;
 
-    const tecnicaIngresada = selectTecnica.value;
-    const estiloArteIngresado = selectArte.value;
+    tecnicaIngresada = selectTecnica.value;
+    estiloArteIngresado = selectArte.value;
 
     const duracionMin = Number(inputMinutos.value);
     const duracionSeg = Number(inputSegundos.value);
@@ -335,8 +312,8 @@ function cotizaAnimacion(e) {
     console.log(tarifaCliente)
     tarifaTecnica = defineTarifaTecnica(tecnicaIngresada);
     console.log(tarifaTecnica)
-    //Empezar a Cotizar recordando que ahora la tarifaDecidida se llama tarifaCliente  
-    //Se van aplicar individualmente a PrecioMinuto de animacion sacado del presetElegido. Precio por Pesonajes y Fondos;
+
+    //Define el precio de Minuto de Animacion, personajes y fondos en base al Tipo de Cliente y al Estilo de Animación
     const precioMinutoAnim = precioAssetsAjustado(presetElegido.precioMinuto);
     const precioCadaPersonaje = precioAssetsAjustado(precioPersonajeBase);
     const precioCadaSecundario = precioAssetsAjustado(precioSecundarioBase);
@@ -359,10 +336,102 @@ function cotizaAnimacion(e) {
     publicaPresupuestoHTML();
 }
 
+function listaDatosProyecto() {
+    lista = `
+    <p><span>Cliente:</span> ${nombreIngresado}</p>
+    <p><span>Proyecto:</span> ${selectProyecto.options[selectProyecto.options.selectedIndex].firstChild.data}</p>
+    <p><span>Técnica de Animación:</span> ${selectTecnica.options[selectTecnica.options.selectedIndex].firstChild.data}</p>
+    <p><span>Estilo Artístico:</span> ${selectArte.options[selectArte.options.selectedIndex].firstChild.data}</p>        
+    `
+    return lista;
+};
+
+function armaFilasPresupuesto(descripcion, cantidad, precio) {
+    fila = `
+        <div class="type-left">${descripcion}</div>
+        <div>${cantidad}</div>
+        <div class="type-right">${precio}</div>	
+    `
+    console.log(fila)
+    return fila;
+}
+
+function publicaPresupuestoHTML() {
+    let divHidden;
+    divHidden = document.querySelector(".presupuestoFinal");
+    datosProyecto.innerHTML = listaDatosProyecto();
+    let ivaPesosSolo = multiplicar(brutoAnimPesos, .21).toFixed(0);
+    let totalPersonajesPesos = conversionDolarPeso(totalPersonajes, cotizacionDolarHoy);
+    let totalSecundariosPesos = conversionDolarPeso(totalSecundarios, cotizacionDolarHoy);
+    let totalFondosPesos = conversionDolarPeso(totalFondos, cotizacionDolarHoy);
+    let totalMinPesos = conversionDolarPeso(totalMinAnimacion, cotizacionDolarHoy);
+
+    if (paisIngresado === "Argentina" && tipoClienteIngresado !== "Particular") {
+        filaProtagonistas.innerHTML = armaFilasPresupuesto("Dibujo y Rigging de Personajes Principales", `${inputPersonajes.value}`, `${totalPersonajesPesos} $  `);
+        filaProtagonistas.classList.remove("hidden");
+        filaSecundarios.innerHTML = armaFilasPresupuesto("Dibujo y Rigging de Personajes Secundarios", `${inputSecundarios.value}`, `${totalSecundariosPesos} $  `);
+        filaSecundarios.classList.remove("hidden");
+        filaFondos.innerHTML = armaFilasPresupuesto("Dibujo y Setting de Fondos", `${inputFondos.value}`, `${totalFondosPesos} $  `);
+        filaFondos.classList.remove("hidden");
+        filaMinutos.innerHTML = armaFilasPresupuesto(`Animación Video – Duración: ${duracionFormatoHora}`, "", `${totalMinPesos} $  `);
+        filaMinutos.classList.remove("hidden");
+        filaTotal.innerHTML = armaFilasPresupuesto("", "Total", `${brutoAnimPesos} $  `);
+        filaTotal.classList.remove("hidden");
+
+        filaSubtotal.innerHTML = armaFilasPresupuesto("", "SubTotal", `${brutoAnimPesos} $  `);;
+        filaSubtotal.classList.remove("hidden");
+        filaIva.innerHTML = armaFilasPresupuesto("", "IVA (21%)", `${ivaPesosSolo} $  `);;
+        filaIva.classList.remove("hidden");
+
+        divHidden.classList.remove("hidden");
+        $('#modal-Presupuesto').modal('show');
+    }
+    else if (paisIngresado === "Argentina" && tipoClienteIngresado === "Particular") {
+        filaProtagonistas.innerHTML = armaFilasPresupuesto("Dibujo y Rigging de Personajes Principales", `${inputPersonajes.value}`, `${totalPersonajesPesos} $  `);
+        filaProtagonistas.classList.remove("hidden");
+        filaSecundarios.innerHTML = armaFilasPresupuesto("Dibujo y Rigging de Personajes Secundarios", `${inputSecundarios.value}`, `${totalSecundariosPesos} $  `);
+        filaSecundarios.classList.remove("hidden");
+        filaFondos.innerHTML = armaFilasPresupuesto("Dibujo y Setting de Fondos", `${inputFondos.value}`, `${totalFondosPesos} $  `);
+        filaFondos.classList.remove("hidden");
+        filaMinutos.innerHTML = armaFilasPresupuesto(`Animación Video – Duración: ${duracionFormatoHora}`, "", `${totalMinPesos} $  `);
+        filaMinutos.classList.remove("hidden");
+        filaTotal.innerHTML = armaFilasPresupuesto("", "Total", `${brutoAnimPesos} $  `);
+        filaTotal.classList.remove("hidden");
+
+        filaSubtotal.classList.add("hidden");
+        filaIva.classList.add("hidden");
+
+        divHidden.classList.remove("hidden");
+        $('#modal-Presupuesto').modal('show');
+    }
+    else {
+        filaProtagonistas.innerHTML = armaFilasPresupuesto("Dibujo y Rigging de Personajes Principales", `${inputPersonajes.value}`, `${totalPersonajes} u$s  `);
+        filaProtagonistas.classList.remove("hidden");
+        filaSecundarios.innerHTML = armaFilasPresupuesto("Dibujo y Rigging de Personajes Secundarios", `${inputSecundarios.value}`, `${totalSecundarios} u$s  `);
+        filaSecundarios.classList.remove("hidden");
+        filaFondos.innerHTML = armaFilasPresupuesto("Dibujo y Setting de Fondos", `${inputFondos.value}`, `${totalFondos} u$s  `);
+        filaFondos.classList.remove("hidden");
+        filaMinutos.innerHTML = armaFilasPresupuesto(`Animación Video – Duración: ${duracionFormatoHora}`, "", `${totalMinAnimacion.toFixed(0)} u$s  `);
+        filaMinutos.classList.remove("hidden");
+        filaTotal.innerHTML = armaFilasPresupuesto("", "Total", `${brutoAnimDolar} u$s  `);
+        filaTotal.classList.remove("hidden");
+
+        filaSubtotal.classList.add("hidden");
+        filaIva.classList.add("hidden");
+
+        divHidden.classList.remove("hidden");
+        $('#modal-Presupuesto').modal('show');
+    }
+};
+
+
+function imprimePresupuesto() {
+    window.print();
+}
+// Hasta acá la 2da Entrega del Desafio Final;
 
 
 
-// Hasta acá el Desafio 8, Eventos
 
 // Scripts que ya tenia en mi html
 wow = new WOW(

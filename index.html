@@ -209,155 +209,173 @@
 			</form>
 
 		</div> -->
-
-		<div id="presupuesto" class="container-fluid px-0">
-			<h2 class="tituloSec mx-0">Obtené tu Presupuesto de Animación</h2>
-			<form id="presupuesto-form" class="needs-validation">
-				<div class="form-row no-gutters justify-content-center align-items-center mb-3 mx-2">
-					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
-						<input name="inp_nombre" type="name" class="form-control" id="inputNombre"
-							placeholder="¿Cómo te llamas?" required>
-					</div>
-					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
-						<input name="inp_email" type="email" class="form-control" id="inputMail"
-							placeholder="Ingresa tu Mail" required>
-					</div>
-					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
-						<input name="inp_pais" type="pais" class="form-control" id="inputPais"
-							placeholder="Ingresa tu Pais" required>
-					</div>
-					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="tipoCliente">Elegí tu Categoría</label>
-						<select class="custom-select" id="selectTipoCliente" required>
-							<option value="Default">--</option>
-							<option value="Particular">Particular</option>
-							<option value="Pyme">Pyme</option>
-							<option value="Músicos">Banda o Interprete independiente</option>
-							<option value="Empresa">Empresa Líder</option>
-							<option value="Productora">Productoras Musicales o Audiovisuales</option>
-						</select>
-					</div>
-					<div class="w-100 mt-2"></div>
-					<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
-						<div class="custom-control custom-radio custom-control-inline col-12 col-md-6 m-0">
-							<input type="radio" id="Con-Guion" name="Guion" class="custom-control-input">
-							<label class="custom-control-label" for="Con-Guion">Tengo un guión terminado</label>
+		<div id="presupuesto" class="container-fluid px-1">
+			<div class="imprimible">
+				<h2 class="tituloSec mx-0">Obtené tu Presupuesto de Animación</h2>
+				<form id="presupuesto-form" class="needs-validation">
+					<div class="form-row no-gutters justify-content-center align-items-center mb-3 mx-0">
+						<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
+							<input name="inp_nombre" type="name" class="form-control" id="inputNombre"
+								placeholder="Ingresa tu nombre, el de tu Empresa o Proyecto" required>
 						</div>
-						<div class="custom-control custom-radio custom-control-inline col-12 col-md-5 m-0">
-							<input type="radio" id="Sin-Guion" name="Guion" class="custom-control-input">
-							<label class="custom-control-label" for="Sin-Guion">Tengo una idea y necesito el
-								guión</label>
+						<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
+							<input name="inp_email" type="email" class="form-control" id="inputMail"
+								placeholder="Ingresa tu Mail" required>
 						</div>
-					</div>
-					<div class="w-100 mt-2"></div>
-					<div class="col-12 col-md-10 col-xl-8 mb-2 row justify-content-between no-gutters">
-						<label class="mr-sm-2 sr-only" for="presetProyecto">Proyecto</label>
-						<select class="custom-select" id="selectProyecto">
-							<option value="Default">¿Qué proyecto tenés en mente?</option>
-							<option value="Motion Graphics">Motion Graphics - Infographics</option>
-							<option value="Rigging">Rigging de Personaje Cut-Out</option>
-							<option value="Animacion Personaje">Animación de Personaje Cut-Out</option>
-							<option value="Escena Animada">Escena Animada Individual</option>
-							<option value="Explicativo Simple">Video Explicativo Simple</option>
-							<option value="Explicativo Complejo">Video Explicativo con Escenas Narrativas</option>
-							<option value="Musical Cantante">Clip Musical con intérprete cantando</option>
-							<option value="Musical Banda">Clip Musical con Banda tocando</option>
-							<option value="Musical Complejo">Clip Musical con Escenas Narrativas</option>
-							<option value="Musical Serie">Clip Musical con Personajes Recurrentes</option>
-							<option value="Serie Narrativa">Serie Animada con Personajes Recurrentes</option>
-							<option value="Cortometraje">Cortometraje o Capítulo de Serie de Unitarios</option>
-						</select>
-					</div>
-
-					<div class="w-100 m-0"></div>
-					<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
-						<div class="col-12 col-md-4 col-xl-4 pr-md-2 mt-1 no-gutters">
-							<label class="presupuestoTitle" for="personajesPrincipales">Número de Protagonistas</label>
-							<input type="text" class="form-control" id="inputPersonajes" placeholder="0" required>
+						<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
+							<input name="inp_pais" type="pais" class="form-control" id="inputPais"
+								placeholder="Ingresa tu Pais" required>
 						</div>
-						<div class="col-12 col-md-4 col-xl-4 mt-1 px-md-1 no-gutters">
-							<label class="presupuestoTitle" for="personajesSecundarios">Número de Secundarios</label>
-							<input type="text" class="form-control" id="inputSecundarios" placeholder="0" required>
+						<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
+							<label class="presupuestoTitle" for="tipoCliente">Elegí tu Categoría</label>
+							<select class="custom-select" id="selectTipoCliente" required>
+								<option value="Default">--</option>
+								<option value="Particular">Particular</option>
+								<option value="Pyme">Pyme</option>
+								<option value="Músicos">Banda o Interprete independiente</option>
+								<option value="Empresa">Empresa Líder</option>
+								<option value="Productora">Productoras Musicales o Audiovisuales</option>
+							</select>
 						</div>
-						<div class="col-12 col-md-4 col-xl-4 pl-md-2 mt-1 no-gutters">
-							<label class="presupuestoTitle" for="fondos">Número de Fondos</label>
-							<input type="text" class="form-control" id="inputFondos" placeholder="0" required>
-						</div>
-					</div>
-					<div class="w-100"></div>
-					<div class="col-12 col-md-5 col-xl-4 mt-1 pr-md-2 justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="tecnicaAnimacion">¿Qué técnica de Animación
-							preferis?</label>
-						<select class="custom-select" id="selectTecnica" required>
-							<option value="Default">--</option>
-							<option value="Cutout">Animación Cut-Out</option>
-							<option value="MasterController">Animación Cut-Out con Giro 360º</option>
-							<option value="Tradicional">Animación Tradicional Cuadro a Cuadro</option>
-							<option value="Mixta">Técnicas Mixtas</option>
-						</select>
-					</div>
-					<div class="ccol-12 col-md-5 col-xl-4 mt-1 pl-md-2 justify-content-between no-gutters">
-						<label class="presupuestoTitle" for="estiloArte">¿Qué Estilo Artístico te gusta?</label>
-						<select class="custom-select" id="selectArte" required>
-							<option value="Default">--</option>
-							<option value="Cartoon">Cartoon Infantil</option>
-							<option value="Anime">Anime</option>
-							<option value="Proporcionales">Personajes Proporcionales</option>
-							<option value="Cabezones">Personajes Cabezones</option>
-							<option value="Fotorrealista">Fotorrealista (simil Stop Motion)</option>
-						</select>
-					</div>
-					<div class="w-100 separador"></div>
-					<div class="col-12 col-md-10 col-xl-8 row no-gutters presupuestoDuracion">
-						<h5>Duración aproximada de cada video</h5>
-						<div class="d-flex no-gutters justify-content-center position-relative">
-							<div class="inputDuracion">
-								<label for="duracionMinutos">Minutos</label>
-								<input type="text" class="form-control" id="inputMin" value="0" required>
+						<div class="w-100 mt-2"></div>
+						<div class="col-12 col-md-10 col-xl-8 mx-0 my-2">
+							<div class="custom-control custom-radio custom-control-inline col-12 col-md-6 m-0">
+								<input type="radio" id="Con-Guion" name="Guion" class="custom-control-input">
+								<label class="custom-control-label" for="Con-Guion">Tengo un guión terminado</label>
 							</div>
-							<p class="puntosDuracion">:</p>
-							<div class="inputDuracion">
-								<label for="duracionMinutos">Segundos</label>
-								<input type="text" class="form-control" id="inputSeg" value="0" required>
+							<div class="custom-control custom-radio custom-control-inline col-12 col-md-5 m-0">
+								<input type="radio" id="Sin-Guion" name="Guion" class="custom-control-input">
+								<label class="custom-control-label" for="Sin-Guion">Tengo una idea y necesito el
+									guión</label>
 							</div>
 						</div>
-					</div>
-					<div class="w-100 separador"></div>
-					<div class="col-12 col-md-10 col-xl-8 my-0 row justify-content-between no-gutters">
-						<div class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" id="activaSerie">
-							<label class="custom-control-label presupuestoTitle" for="activaSerie">Activalo si tu
-								proyecto es una serie</label>
+						<div class="w-100 mt-2"></div>
+						<div class="col-12 col-md-10 col-xl-8 mb-2 row justify-content-between no-gutters">
+							<label class="mr-sm-2 sr-only" for="presetProyecto">Proyecto</label>
+							<select class="custom-select" id="selectProyecto">
+								<option value="Default">¿Qué proyecto tenés en mente?</option>
+								<option value="Motion Graphics">Motion Graphics - Infographics</option>
+								<option value="Rigging">Rigging de Personaje Cut-Out</option>
+								<option value="Animacion Personaje">Animación de Personaje Cut-Out</option>
+								<option value="Escena Animada">Escena Animada Individual</option>
+								<option value="Explicativo Simple">Video Explicativo Simple</option>
+								<option value="Explicativo Complejo">Video Explicativo con Escenas Narrativas</option>
+								<option value="Musical Cantante">Clip Musical con intérprete cantando</option>
+								<option value="Musical Banda">Clip Musical con Banda tocando</option>
+								<option value="Musical Complejo">Clip Musical con Escenas Narrativas</option>
+								<option value="Musical Serie">Clip Musical con Personajes Recurrentes</option>
+								<option value="Serie Narrativa">Serie Animada con Personajes Recurrentes</option>
+								<option value="Cortometraje">Cortometraje o Capítulo de Serie de Unitarios</option>
+							</select>
+						</div>
+
+						<div class="w-100 m-0"></div>
+						<div class="col-12 col-md-10 col-xl-8 my-1 row justify-content-between no-gutters">
+							<div class="col-12 col-md-4 col-xl-4 pr-md-2 mt-1 no-gutters">
+								<label class="presupuestoTitle" for="personajesPrincipales">Número de Protagonistas</label>
+								<input type="text" class="form-control" id="inputPersonajes" placeholder="0" required>
+							</div>
+							<div class="col-12 col-md-4 col-xl-4 mt-1 px-md-1 no-gutters">
+								<label class="presupuestoTitle" for="personajesSecundarios">Número de Secundarios</label>
+								<input type="text" class="form-control" id="inputSecundarios" placeholder="0" required>
+							</div>
+							<div class="col-12 col-md-4 col-xl-4 pl-md-2 mt-1 no-gutters">
+								<label class="presupuestoTitle" for="fondos">Número de Fondos</label>
+								<input type="text" class="form-control" id="inputFondos" placeholder="0" required>
+							</div>
+						</div>
+						<div class="w-100"></div>
+						<div class="col-12 col-md-5 col-xl-4 mt-1 pr-md-2 justify-content-between no-gutters">
+							<label class="presupuestoTitle" for="tecnicaAnimacion">¿Qué técnica de Animación
+								preferis?</label>
+							<select class="custom-select" id="selectTecnica" required>
+								<option value="Default">--</option>
+								<option value="Cutout">Animación Cut-Out</option>
+								<option value="MasterController">Animación Cut-Out con Giro 360º</option>
+								<option value="Tradicional">Animación Tradicional Cuadro a Cuadro</option>
+								<option value="Mixta">Técnicas Mixtas</option>
+							</select>
+						</div>
+						<div class="ccol-12 col-md-5 col-xl-4 mt-1 pl-md-2 justify-content-between no-gutters">
+							<label class="presupuestoTitle" for="estiloArte">¿Qué Estilo Artístico te gusta?</label>
+							<select class="custom-select" id="selectArte" required>
+								<option value="Default">--</option>
+								<option value="Cartoon">Cartoon Infantil</option>
+								<option value="Anime">Anime</option>
+								<option value="Americano">Comic Americano</option>
+								<option value="Cabezones">Personajes Cabezones</option>
+								<option value="Fotorrealista">Fotorrealista (simil Stop Motion)</option>
+							</select>
+						</div>
+						<div class="w-100 separador"></div>
+						<div class="col-12 col-md-10 col-xl-8 row no-gutters presupuestoDuracion">
+							<h5>Duración aproximada de cada video</h5>
+							<div class="d-flex no-gutters justify-content-center position-relative">
+								<div class="inputDuracion">
+									<label for="duracionMinutos">Minutos</label>
+									<input type="text" class="form-control" id="inputMin" value="0" required>
+								</div>
+								<p class="puntosDuracion">:</p>
+								<div class="inputDuracion">
+									<label for="duracionMinutos">Segundos</label>
+									<input type="text" class="form-control" id="inputSeg" value="0" required>
+								</div>
+							</div>
+						</div>
+						<div class="w-100 separador"></div>
+						<div class="preguntasSerie col-12 col-md-10 col-xl-8 row py-1 justify-content-between no-gutters hidden">
+							<div class="col-6 row p-0 m-0 pr-2">
+								<label class="presupuestoTitle" for="personajesRecurrentes">¿Cuántos personajes
+									recurrentes?</label>
+								<input type="text" class="form-control" id="personajesRecurrentes" placeholder="0">
+							</div>
+							<div class="col-6 row p-0 m-0 pl-2">
+								<label class="presupuestoTitle" for="capitulos">¿Cuántos capítulos con esos
+									personajes?</label>
+								<input type="text" class="form-control" id="capitulos" placeholder="0">
+							</div>
+						</div>
+						<div class="w-100 separador preguntasSerie hidden"></div>
+						<div class="col-12 col-md-10 col-xl-8 mt-2">
+							<input class="btn btn-outline-danger btn-lg pull-right" type="submit" value="Obtené tu Presupuesto" >
+							<input class="btn btn-outline-danger btn-lg pull-right mr-2" type="reset" value="Reset">
 						</div>
 					</div>
-					<div class="w-100 m-0"></div>
-					<div
-						class="preguntasSerie col-12 col-md-10 col-xl-8 row py-1 justify-content-between no-gutters hidden">
-						<div class="col-6 row p-0 m-0 pr-2">
-							<label class="presupuestoTitle" for="personajesRecurrentes">¿Cuántos personajes
-								recurrentes?</label>
-							<input type="text" class="form-control" id="personajesRecurrentes" placeholder="0">
+				</form>		
+				<div id="modal-Presupuesto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-PortfolioLabel"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered modal-lg">
+						<div class="modal-content">
+							<div class="modal-body-wrapper">
+								<div class="modal-body p-0">
+									<button type="button border-0" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+									<div class="presupuestoFinal hidden">
+										<div class="datosProyecto"></div>
+										<div>
+											<div class="headerTabla">
+												<div class="type-left">Descripción</div>
+												<div>Cantidad</div>
+												<div>Precio</div>
+											</div>
+											<div class="filaTabla filaProtas hidden"></div>
+											<div class="filaTabla filaSecund hidden"></div>
+											<div class="filaTabla filaFondos hidden"></div>
+											<div class="filaTabla filaMin hidden"></div>
+											<div class="filaTabla filaSubtotal hidden">	</div>
+											<div class="filaTabla filaIva hidden"></div>
+											<div class="filaTabla filaTotal hidden"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline-danger btn-lg pull-right print">Imprimir</button>
+							</div>
 						</div>
-						<div class="col-6 row p-0 m-0 pl-2">
-							<label class="presupuestoTitle" for="capitulos">¿Cuántos capítulos con esos
-								personajes?</label>
-							<input type="text" class="form-control" id="capitulos" placeholder="0">
-						</div>
-					</div>
-					<div class="w-100 separador"></div>
-					<div class="col-12 col-md-10 col-xl-8 mt-2">
-						<input class="btn btn-outline-danger btn-lg pull-right" type="submit"
-							value="Obtené tu Presupuesto">
-						<input class="btn btn-outline-danger btn-lg pull-right mr-2" type="reset" value="Reseteá">
 					</div>
 				</div>
-			</form>
-			<div class="presupuestoFinal row no-gutters justify-content-center align-items-center hidden">
-				<div class="w-100 separador m-0"></div>
-				<h5 class="col-12 col-md-10 col-xl-8 mx-0 mb-2 mt-4"></h5>
-				<p class="col-12 col-md-10 col-xl-8 mx-0 my-2"></p>
-				<p class="col-12 col-md-10 col-xl-8 mx-0 mb-4 mt-0 iva"></p>
-				<div class="w-100 separador m-0"></div>
 			</div>
 		</div>
 	</main>

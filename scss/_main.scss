@@ -596,15 +596,6 @@ body {
 			}
 		}	
 	}
-	.presupuestoFinal {
-		background-color: $black;
-		h5 {
-			font-size: 1.3em
-		}
-		p {
-			font-size: 1.2em
-		}
-	}
 	.hidden {
 		display: none !important;
 	}
@@ -612,6 +603,73 @@ body {
 		margin: .5em 0;
 		height: 2px;
 		background-color: lighten($red-dk, 20%); 
+	}
+	#modal-Presupuesto {
+		.close {
+			position: absolute;
+			right: 0; 
+			top: -35px;
+			z-index: 999;
+			font-size: 3rem;
+			font-weight: normal;
+			color: $text-especial;
+			opacity: 2;
+			text-shadow: 0 1px 0 darken( $third-color, 10% );           
+		}
+		.modal-body {
+			height: 80vh;
+		}
+		.modal-footer {
+			background-color: $secondary-color;
+		}
+		.presupuestoFinal {
+			width: 100%;
+			color: $black;
+			background-color: $white;
+			padding: 2em;
+		
+			.datosProyecto {
+				font-size: .8em;
+				line-height: 1.2;
+				margin: .5em;
+				span {
+					font-weight: $font-bold;
+				}
+			}
+			.headerTabla {
+				font-size: 1.1em;
+				line-height: 1;
+				padding: .6em .5em .4em .5em;
+				display: grid;
+				grid-template-columns: 6fr 1fr 1fr;
+				justify-items: stretch;
+				align-items: center;
+				text-align: center;
+				color: $white;
+				background-color: $red-dk;
+			}
+			.filaTabla {
+				font-size: 1em;
+				line-height: 1;
+				padding: .6em .5em .4em .5em;
+				display: grid;
+				grid-template-columns: 6fr 1fr 1fr;
+				justify-items: stretch;
+				align-items: center;
+				text-align: center;
+				border-bottom: solid 2px $black;
+				&.filaSubtotal, &.filaIva,  &.filaTotal {
+					border-bottom: solid 0px $black;
+					font-weight: $font-bold;
+				}			
+			}
+			h5 {
+				font-size: 1.3em;
+			}
+			p {
+				font-size: 1.2em;
+			}
+		}
 	}	
 }
 
