@@ -31,7 +31,76 @@
   @if $direction == portrait {
     @media #{$orientation-portrait} { @content; } 
   }
-} 
+}
+
+//Imprime Modal
+@media screen {
+    #paraImprimir {
+        display: none;
+    }
+  }
+  
+  @media print {
+    body * {
+      visibility:hidden;
+    }
+    #paraImprimir, #paraImprimir * {
+      visibility:visible;
+    }
+    #paraImprimir {
+        position:absolute;
+        left:0;
+        top:0;
+        width: 100%;
+        .presupuestoFinal {
+            width: 100%;
+            color: $black;
+            background-color: $white;
+            padding: 2em;		
+            .datosProyecto {
+                font-size: .8em;
+                line-height: 1.2;
+                margin: .5em;
+                span {
+                    font-weight: $font-bold;
+                }
+            }
+            .headerTabla {
+                font-size: 1.1em;
+                line-height: 1;
+                padding: .6em .5em .4em .5em;
+                display: grid;
+                grid-template-columns: 6fr 1fr 1fr;
+                justify-items: stretch;
+                align-items: center;
+                text-align: center;
+                color: $white;
+                background-color: $red-dk;
+            }
+            .filaTabla {
+                font-size: 1em;
+                line-height: 1;
+                padding: .6em .5em .4em .5em;
+                display: grid;
+                grid-template-columns: 6fr 1fr 1fr;
+                justify-items: stretch;
+                align-items: center;
+                text-align: center;
+                border-bottom: solid 2px $black;
+                &.filaSubtotal, &.filaIva,  &.filaTotal {
+                    border-bottom: solid 0px $black;
+                    font-weight: $font-bold;
+                }			
+            }
+            h5 {
+                font-size: 1.3em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+        }
+    }
+}
 
 
 //Encabezados Secciones

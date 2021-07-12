@@ -1,4 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Rock+Salt&display=swap");
+@media screen {
+  #paraImprimir {
+    display: none; } }
+
+@media print {
+  body * {
+    visibility: hidden; }
+  #paraImprimir, #paraImprimir * {
+    visibility: visible; }
+  #paraImprimir {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%; }
+    #paraImprimir .presupuestoFinal {
+      width: 100%;
+      color: #090411;
+      background-color: #FFF;
+      padding: 2em; }
+      #paraImprimir .presupuestoFinal .datosProyecto {
+        font-size: .8em;
+        line-height: 1.2;
+        margin: .5em; }
+        #paraImprimir .presupuestoFinal .datosProyecto span {
+          font-weight: 700; }
+      #paraImprimir .presupuestoFinal .headerTabla {
+        font-size: 1.1em;
+        line-height: 1;
+        padding: .6em .5em .4em .5em;
+        display: grid;
+        grid-template-columns: 6fr 1fr 1fr;
+        justify-items: stretch;
+        align-items: center;
+        text-align: center;
+        color: #FFF;
+        background-color: #831B21; }
+      #paraImprimir .presupuestoFinal .filaTabla {
+        font-size: 1em;
+        line-height: 1;
+        padding: .6em .5em .4em .5em;
+        display: grid;
+        grid-template-columns: 6fr 1fr 1fr;
+        justify-items: stretch;
+        align-items: center;
+        text-align: center;
+        border-bottom: solid 2px #090411; }
+        #paraImprimir .presupuestoFinal .filaTabla.filaSubtotal, #paraImprimir .presupuestoFinal .filaTabla.filaIva, #paraImprimir .presupuestoFinal .filaTabla.filaTotal {
+          border-bottom: solid 0px #090411;
+          font-weight: 700; }
+      #paraImprimir .presupuestoFinal h5 {
+        font-size: 1.3em; }
+      #paraImprimir .presupuestoFinal p {
+        font-size: 1.2em; } }
+
 body {
   font-family: "Kalam", cursive;
   font-weight: 400; }

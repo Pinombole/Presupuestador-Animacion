@@ -79,6 +79,8 @@ let precioFondoBase = 100;
 let tarifaCliente;
 let tarifaTecnica;
 let cotizacionDolarHoy = 94.93;
+let guionMinAnimacion = 20;
+let totalGuion;
 let totalMinAnimacion;
 let duracionFormatoHora;
 let totalPersonajes;
@@ -117,20 +119,28 @@ const selectTipoCliente = document.querySelector('#selectTipoCliente');
 const selectTecnica = document.querySelector('#selectTecnica');
 const selectArte = document.querySelector('#selectArte');
 const preguntasSerie = document.querySelectorAll('.preguntasSerie');
+const inputRecurrentes = document.querySelector('#personajesRecurrentes');
+const inputCapitulos = document.querySelector('#cantCapitulos');
 const botonImprimir = document.querySelector('.print');
 const datosProyecto = document.querySelector('.datosProyecto');
 const filaProtagonistas = document.querySelector('.filaProtas');
 const filaSecundarios = document.querySelector('.filaSecund');
 const filaFondos = document.querySelector('.filaFondos');
 const filaMinutos = document.querySelector('.filaMin');
+const filaGuion = document.querySelector('.filaGuion');
 const filaSubtotal = document.querySelector('.filaSubtotal');
 const filaIva = document.querySelector('.filaIva');
 const filaTotal = document.querySelector('.filaTotal');
+
 
 //Event Listeners
 presupuestoForm.addEventListener("submit", cotizaAnimacion);
 selectProyecto.addEventListener("change", eligePreset);
 botonImprimir.addEventListener("click", imprimePresupuesto)
+
+$(document).ready(() => {
+    recuperaClaseHidden();
+})
 
 //Funciones
 const secondsToMinutes = (segundos) => segundos / 60;
@@ -201,11 +211,84 @@ function eligePreset() {
     //Elige Preset
     const buscado = selectProyecto.value;
     const presetEncontrado = buscaObjetoEnArray(presets, buscado);
-
     //Preset Elegido Define las opciones predeterminadas
     seteaPredeterminados(presetEncontrado);
     return presetEncontrado;
 }
+
+function guardaClaseHidden() {
+    let hiddenInputPersonajes = buscaClaseHidden(inputPersonajes);
+    localStorage.setItem('hiddenInputPersonajes', JSON.stringify(hiddenInputPersonajes));
+    let hiddenInputSecundarios = buscaClaseHidden(inputSecundarios);
+    localStorage.setItem('hiddenInputSecundarios', JSON.stringify(hiddenInputSecundarios));
+    let hiddenInputFondos = buscaClaseHidden(inputFondos);
+    localStorage.setItem('hiddenInputFondos', JSON.stringify(hiddenInputFondos));
+    let hiddenSelectTecnica = buscaClaseHidden(selectTecnica);
+    localStorage.setItem('hiddenSelectTecnica', JSON.stringify(hiddenSelectTecnica));
+    let hiddenSelectArte = buscaClaseHidden(selectArte);
+    localStorage.setItem('hiddenSelectArte', JSON.stringify(hiddenSelectArte));
+    let hiddenPreguntasSerie = []
+    preguntasSerie.forEach((node) => { hiddenPreguntasSerie.push(node.classList.contains("hidden")) });
+    localStorage.setItem('hiddenPreguntasSerie', JSON.stringify(hiddenPreguntasSerie));
+}
+
+function recuperaClaseHidden() {
+    if (JSON.parse(localStorage.getItem('hiddenInputPersonajes')) === true) {
+        inputPersonajes.parentElement.classList.add("hidden");
+    }
+    else {
+        inputPersonajes.parentElement.classList.remove("hidden");
+    };
+
+    if (JSON.parse(localStorage.getItem('hiddenInputSecundarios')) === true) {
+        inputSecundarios.parentElement.classList.add("hidden");
+    }
+    else {
+        inputSecundarios.parentElement.classList.remove("hidden");
+    };
+
+    if (JSON.parse(localStorage.getItem('hiddenInputFondos')) === true) {
+        inputFondos.parentElement.classList.add("hidden");
+    }
+    else {
+        inputFondos.parentElement.classList.remove("hidden");
+    };
+
+    if (JSON.parse(localStorage.getItem('hiddenSelectTecnica')) === true) {
+        selectTecnica.parentElement.classList.add("hidden");
+    }
+    else {
+        selectTecnica.parentElement.classList.remove("hidden");
+    };
+
+    if (JSON.parse(localStorage.getItem('hiddenSelectArte')) === true) {
+        selectArte.parentElement.classList.add("hidden");
+    }
+    else {
+        selectArte.parentElement.classList.remove("hidden");
+    };
+
+    const condicion1 = [true, true];
+    const condicion2 = JSON.parse(localStorage.getItem('hiddenPreguntasSerie'));
+
+    if (condicion1[0] == condicion2[0]) {
+        preguntasSerie.forEach((node) => { node.classList.add("hidden") });
+    }
+    else {
+        preguntasSerie.forEach((node) => { node.classList.remove("hidden") });
+    };
+}
+
+function buscaClaseHidden(input) {
+    let booleano;
+    if (input.parentElement.classList.contains("hidden")) {
+        booleano = true;
+    }
+    else {
+        booleano = false;
+    }
+    return booleano;
+};
 
 function seteaPredeterminados(preset) {
     const personajes = preset.getNumPersonajes;
@@ -221,7 +304,7 @@ function seteaPredeterminados(preset) {
         inputFondos.parentElement.classList.add("hidden");
         selectTecnica.parentElement.classList.add("hidden");
         selectArte.parentElement.classList.add("hidden");
-        preguntasSerie.forEach((node) => { node.classList.add("hidden") })
+        preguntasSerie.forEach((node) => { node.classList.add("hidden") });
     }
     else if (preset.getNombrePreset === "Serie Narrativa" || preset.getNombrePreset === "Musical Serie") {
         preguntasSerie.forEach((node) => { node.classList.remove("hidden") });
@@ -233,6 +316,8 @@ function seteaPredeterminados(preset) {
         inputPersonajes.value = personajes;
         inputSecundarios.value = secundarios;
         inputFondos.value = fondos;
+        inputRecurrentes.value = inputPersonajes.value;
+        inputCapitulos.value = 2;
     }
     else {
         inputPersonajes.parentElement.classList.remove("hidden");
@@ -243,12 +328,13 @@ function seteaPredeterminados(preset) {
         inputPersonajes.value = personajes;
         inputSecundarios.value = secundarios;
         inputFondos.value = fondos;
-        preguntasSerie.forEach((node) => { node.classList.add("hidden") })
+        preguntasSerie.forEach((node) => { node.classList.add("hidden") });
     }
+
+    guardaClaseHidden();
 
     //El if no me queda grabado al tocar F5. ¿Habria que agregarlo al Local o al Session Storage?
 }
-
 
 function listaNombresArrayDeObjetos(array) {
     const listado = [];
@@ -258,8 +344,8 @@ function listaNombresArrayDeObjetos(array) {
     return listado;
 }
 
-function buscaObjetoEnArray(array, buscado) {
-    const findPreset = array.find(preset => preset.nombre.toLowerCase() === buscado.toLowerCase())
+function buscaObjetoEnArray(array, valueBuscado) {
+    const findPreset = array.find(preset => preset.nombre.toLowerCase() === valueBuscado.toLowerCase())
     return findPreset;
 }
 
@@ -275,9 +361,20 @@ function precioAssetsAjustado(precioBase) {
     return precioAssetAjustado;
 }
 
+function calculaCostoGuion(tiempo) {
+    let guionAjustado = precioAssetsAjustado(guionMinAnimacion);
+    let totalGuion = multiplicar(guionAjustado, tiempo);
+    return totalGuion;
+}
+
 function cotizadorBruto() {
     let sumaFinal;
-    sumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion;
+    if ($('#Con-Guion')[0].checked === false && $('#Sin-Guion')[0].checked === true) {
+        sumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion + totalGuion;
+    }
+    else {
+        sumaFinal = totalPersonajes + totalSecundarios + totalFondos + totalMinAnimacion;
+    }
     return sumaFinal.toFixed(0);
 }
 
@@ -293,7 +390,6 @@ function cotizaAnimacion(e) {
     // Acá mandaría el dato de cliente al Storage ¿?
 
     presetElegido = buscaObjetoEnArray(presets, selectProyecto.value);
-    console.log(presetElegido);
 
     //Usuario Modifica Cantidades
     cantidadPersonajes = inputPersonajes.value;
@@ -309,9 +405,7 @@ function cotizaAnimacion(e) {
     duracionFormatoHora = getFormatoHora(duracionIngresada);
 
     tarifaCliente = defineTarifaCliente(tipoClienteIngresado);
-    console.log(tarifaCliente)
     tarifaTecnica = defineTarifaTecnica(tecnicaIngresada);
-    console.log(tarifaTecnica)
 
     //Define el precio de Minuto de Animacion, personajes y fondos en base al Tipo de Cliente y al Estilo de Animación
     const precioMinutoAnim = precioAssetsAjustado(presetElegido.precioMinuto);
@@ -319,21 +413,20 @@ function cotizaAnimacion(e) {
     const precioCadaSecundario = precioAssetsAjustado(precioSecundarioBase);
     const precioCadaFondo = precioAssetsAjustado(precioFondoBase);
 
+    totalGuion = calculaCostoGuion(duracionIngresada);
+
     totalMinAnimacion = multiplicar(precioMinutoAnim, duracionIngresada);
-    console.log(`Total Minuto: ${totalMinAnimacion}`);
     totalPersonajes = multiplicar(precioCadaPersonaje, cantidadPersonajes)
-    console.log(`Total Personaje: ${totalPersonajes}`);
     totalSecundarios = multiplicar(precioCadaSecundario, cantidadSecundarios);
-    console.log(`Total Secundario: ${totalSecundarios}`);
     totalFondos = multiplicar(precioCadaFondo, cantidadFondos);
-    console.log(`Total Fondo: ${totalFondos}`);
 
     brutoAnimDolar = cotizadorBruto();
     brutoAnimPesos = conversionDolarPeso(brutoAnimDolar, cotizacionDolarHoy);
     precioMasIva = calcularIva(brutoAnimPesos);
-    console.log(`Total Dolar: ${brutoAnimDolar}`);
 
     publicaPresupuestoHTML();
+
+    incluyeGuionHTML();
 }
 
 function listaDatosProyecto() {
@@ -424,8 +517,40 @@ function publicaPresupuestoHTML() {
     }
 };
 
+function incluyeGuionHTML() {
+    let guionPesificado = conversionDolarPeso(totalGuion, cotizacionDolarHoy);
+    console.log(guionPesificado)
+    if ($('#Con-Guion')[0].checked === false && $('#Sin-Guion')[0].checked === true && paisIngresado !== "Argentina") {
+        filaGuion.innerHTML = armaFilasPresupuesto(`Guion Video – Duración: ${duracionFormatoHora}`, "", `${totalGuion} u$s  `);
+        filaGuion.classList.remove("hidden");
+    }
+    else if ($('#Con-Guion')[0].checked === false && $('#Sin-Guion')[0].checked === true && paisIngresado === "Argentina") {
+        filaGuion.innerHTML = armaFilasPresupuesto(`Guion Video – Duración: ${duracionFormatoHora}`, "", `${guionPesificado} $  `);
+        filaGuion.classList.remove("hidden");
+    }
+    else {
+        filaGuion.classList.add("hidden");
+    }
+}
+
 
 function imprimePresupuesto() {
+    imprimeDiv(document.querySelector(".imprimible"));
+}
+
+function imprimeDiv(divImprimible) {
+    var domClonado = divImprimible.cloneNode(true);
+
+    var $printSection = document.querySelector("#paraImprimir");
+
+    if (!$printSection) {
+        var $printSection = document.createElement("div");
+        $printSection.id = "paraImprimir";
+        document.body.appendChild($printSection);
+    }
+
+    $printSection.innerHTML = "";
+    $printSection.appendChild(domClonado);
     window.print();
 }
 // Hasta acá la 2da Entrega del Desafio Final;
