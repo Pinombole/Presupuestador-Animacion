@@ -1,0 +1,16 @@
+[
+    {
+        "nombre": "Default",
+        "numPersonajes": 0,
+        "numSecundarios": 0,
+        "numFondos": 0,
+        "precioMinuto": 200
+    },
+    {
+        "nombre": "Motion Graphics",
+        "numPersonajes": 0,
+        "numSecundarios": 0,
+        "numFondos": 0,
+        "precioMinuto": 400
+    }
+]

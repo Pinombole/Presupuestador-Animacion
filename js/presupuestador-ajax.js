@@ -1,18 +1,18 @@
 // Constuctores
 class PresetAnimacion {
-    constructor(nombre, personajes = 0, secundarios = 0, fondos = 0, precio = 200) {
+    constructor(nombre, personajes = 0, secundarios = 0, fondos = 0, precio = 100) {
         this.nombre = nombre;
         this.numPersonajes = personajes;
         this.numSecundarios = secundarios;
         this.numFondos = fondos;
         this.precioMinuto = precio;
     }
-    get getNombrePreset() {
-        return this.nombre;
-    }
-    set setNombrePreset(nuevo) {
-        this.nombre = nuevo;
-    }
+    // get getNombrePreset() {
+    //     return this.nombre;
+    // }
+    // set setNombrePreset(nuevo) {
+    //     this.nombre = nuevo;
+    // }
     get getNumPersonajes() {
         return this.numPersonajes;
     }
@@ -39,6 +39,15 @@ class PresetAnimacion {
     }
 }
 
+function agregaGetSet(objetoArray) {
+    let objeto = objetoArray;
+
+    objeto.getNombrePreset = { get getNombrePreset() { return this.nombre } }
+
+    objeto.setNombrePreset = { set setNombrePreset(nuevo) { this.nombre = nuevo; } }
+
+};
+
 class Cliente {
     constructor(nombre, mail, pais, tipoCliente) {
         this.nombre = nombre;
@@ -59,6 +68,8 @@ class Cliente {
         this.tipoCliente = nuevo;
     }
 };
+
+
 
 //Variables
 let nombreIngresado;
@@ -92,7 +103,7 @@ let precioMasIva;
 const presets = [];
 
 presets.push(new PresetAnimacion("Default", 0, 0, 0, 200));
-presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 600));
+presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 400));
 presets.push(new PresetAnimacion("Rigging", 1, 0, 0, 0));
 presets.push(new PresetAnimacion("Animacion Personaje", 1, 0, 0, 150));
 presets.push(new PresetAnimacion("Escena Animada", 1, 0, 1, 200));
@@ -104,6 +115,8 @@ presets.push(new PresetAnimacion("Musical Complejo", 5, 2, 7, 300));
 presets.push(new PresetAnimacion("Musical Serie", 2, 2, 5, 200));
 presets.push(new PresetAnimacion("Serie Narrativa", 4, 4, 5, 200));
 presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 300));
+
+presets.forEach((i) => agregaGetSet(i));
 
 const presupuestoForm = document.querySelector('#presupuesto-form');
 const inputNombre = document.querySelector('#inputNombre');
