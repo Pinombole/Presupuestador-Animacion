@@ -7,12 +7,12 @@ class PresetAnimacion {
         this.numFondos = fondos;
         this.precioMinuto = precio;
     }
-    // get getNombrePreset() {
-    //     return this.nombre;
-    // }
-    // set setNombrePreset(nuevo) {
-    //     this.nombre = nuevo;
-    // }
+    get getNombrePreset() {
+        return this.nombre;
+    }
+    set setNombrePreset(nuevo) {
+        this.nombre = nuevo;
+    }
     get getNumPersonajes() {
         return this.numPersonajes;
     }
@@ -39,15 +39,6 @@ class PresetAnimacion {
     }
 }
 
-function agregaGetSet(objetoArray) {
-    let objeto = objetoArray;
-
-    objeto.getNombrePreset = { get getNombrePreset() { return this.nombre } }
-
-    objeto.setNombrePreset = { set setNombrePreset(nuevo) { this.nombre = nuevo; } }
-
-};
-
 class Cliente {
     constructor(nombre, mail, pais, tipoCliente) {
         this.nombre = nombre;
@@ -68,8 +59,6 @@ class Cliente {
         this.tipoCliente = nuevo;
     }
 };
-
-
 
 //Variables
 let nombreIngresado;
@@ -102,21 +91,24 @@ let brutoAnimPesos;
 let precioMasIva;
 const presets = [];
 
-presets.push(new PresetAnimacion("Default", 0, 0, 0, 200));
-presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 400));
-presets.push(new PresetAnimacion("Rigging", 1, 0, 0, 0));
-presets.push(new PresetAnimacion("Animacion Personaje", 1, 0, 0, 150));
-presets.push(new PresetAnimacion("Escena Animada", 1, 0, 1, 200));
-presets.push(new PresetAnimacion("Explicativo Simple", 1, 0, 2, 200));
-presets.push(new PresetAnimacion("Explicativo Complejo", 3, 2, 5, 300));
-presets.push(new PresetAnimacion("Musical Cantante", 1, 0, 4, 200));
-presets.push(new PresetAnimacion("Musical Banda", 5, 0, 1, 200));
-presets.push(new PresetAnimacion("Musical Complejo", 5, 2, 7, 300));
-presets.push(new PresetAnimacion("Musical Serie", 2, 2, 5, 200));
-presets.push(new PresetAnimacion("Serie Narrativa", 4, 4, 5, 200));
-presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 300));
+function obtienePresetsJson(nombre, personaje, secundario, fondo, minAnimacion) {
+    presets.push(new PresetAnimacion(nombre, personaje, secundario, fondo, minAnimacion));
+}
 
-presets.forEach((i) => agregaGetSet(i));
+$.ajax({
+    url: "js/presets.json",
+    method: "GET",
+    dataType: "JSON",
+    success: function (data, status, jqXHR) {
+        data.forEach(function (i) {
+            obtienePresetsJson(i.nombre, i.numPersonajes, i.numSecundarios, i.numFondos, i.precioMinuto)
+        });
+        console.log(presets);
+    },
+    error: function (jqXHR, status, error) {
+        console.log("Error al leer los Presets");
+    }
+});
 
 const presupuestoForm = document.querySelector('#presupuesto-form');
 const inputNombre = document.querySelector('#inputNombre');
@@ -458,7 +450,6 @@ function armaFilasPresupuesto(descripcion, cantidad, precio) {
         <div>${cantidad}</div>
         <div class="type-right">${precio}</div>	
     `
-    console.log(fila)
     return fila;
 }
 
@@ -532,7 +523,6 @@ function publicaPresupuestoHTML() {
 
 function incluyeGuionHTML() {
     let guionPesificado = conversionDolarPeso(totalGuion, cotizacionDolarHoy);
-    console.log(guionPesificado)
     if ($('#Con-Guion')[0].checked === false && $('#Sin-Guion')[0].checked === true && paisIngresado !== "Argentina") {
         filaGuion.innerHTML = armaFilasPresupuesto(`Guion Video – Duración: ${duracionFormatoHora}`, "", `${totalGuion} u$s  `);
         filaGuion.classList.remove("hidden");

@@ -12,5 +12,82 @@
         "numSecundarios": 0,
         "numFondos": 0,
         "precioMinuto": 400
+    },
+    {
+        "nombre": "Rigging",
+        "numPersonajes": 1,
+        "numSecundarios": 0,
+        "numFondos": 0,
+        "precioMinuto": 0
+    },
+    {
+        "nombre": "Animacion Personaje",
+        "numPersonajes": 1,
+        "numSecundarios": 0,
+        "numFondos": 0,
+        "precioMinuto": 150
+    },
+    {
+        "nombre": "Escena Animada",
+        "numPersonajes": 1,
+        "numSecundarios": 0,
+        "numFondos": 1,
+        "precioMinuto": 200
+    },
+    {
+        "nombre": "Explicativo Simple",
+        "numPersonajes": 1,
+        "numSecundarios": 0,
+        "numFondos": 2,
+        "precioMinuto": 200
+    },
+    {
+        "nombre": "Explicativo Complejo",
+        "numPersonajes": 3,
+        "numSecundarios": 2,
+        "numFondos": 5,
+        "precioMinuto": 300
+    },
+    {
+        "nombre": "Musical Cantante",
+        "numPersonajes": 1,
+        "numSecundarios": 0,
+        "numFondos": 4,
+        "precioMinuto": 200
+    },
+    {
+        "nombre": "Musical Banda",
+        "numPersonajes": 5,
+        "numSecundarios": 0,
+        "numFondos": 1,
+        "precioMinuto": 200
+    },
+    {
+        "nombre": "Musical Complejo",
+        "numPersonajes": 5,
+        "numSecundarios": 2,
+        "numFondos": 7,
+        "precioMinuto": 300
+    },
+    {
+        "nombre": "Musical Serie",
+        "numPersonajes": 2,
+        "numSecundarios": 2,
+        "numFondos": 5,
+        "precioMinuto": 200
+    },
+    {
+        "nombre": "Serie Narrativa",
+        "numPersonajes": 4,
+        "numSecundarios": 4,
+        "numFondos": 5,
+        "precioMinuto": 200
+    },
+    {
+        "nombre": "Cortometraje",
+        "numPersonajes": 2,
+        "numSecundarios": 4,
+        "numFondos": 7,
+        "precioMinuto": 300
     }
 ]
