@@ -73,12 +73,12 @@ let cantidadSecundarios;
 let cantidadFondos;
 let tecnicaIngresada;
 let estiloArteIngresado;
-let precioPersonajeBase = 150;
-let precioSecundarioBase = 100;
-let precioFondoBase = 100;
+let precioPersonajeBase;
+let precioSecundarioBase;
+let precioFondoBase;
 let tarifaCliente;
 let tarifaTecnica;
-let cotizacionDolarHoy = 94.93;
+let cotizacionDolarHoy;
 let guionMinAnimacion = 20;
 let totalGuion;
 let totalMinAnimacion;
@@ -91,19 +91,37 @@ let brutoAnimPesos;
 let precioMasIva;
 const presets = [];
 
-presets.push(new PresetAnimacion("Default", 0, 0, 0, 200));
-presets.push(new PresetAnimacion("Motion Graphics", 0, 0, 0, 400));
-presets.push(new PresetAnimacion("Rigging", 1, 0, 0, 0));
-presets.push(new PresetAnimacion("Animacion Personaje", 1, 0, 0, 150));
-presets.push(new PresetAnimacion("Escena Animada", 1, 0, 1, 200));
-presets.push(new PresetAnimacion("Explicativo Simple", 1, 0, 2, 200));
-presets.push(new PresetAnimacion("Explicativo Complejo", 3, 2, 5, 300));
-presets.push(new PresetAnimacion("Musical Cantante", 1, 0, 4, 200));
-presets.push(new PresetAnimacion("Musical Banda", 5, 0, 1, 200));
-presets.push(new PresetAnimacion("Musical Complejo", 5, 2, 7, 300));
-presets.push(new PresetAnimacion("Musical Serie", 2, 2, 5, 200));
-presets.push(new PresetAnimacion("Serie Narrativa", 4, 4, 5, 200));
-presets.push(new PresetAnimacion("Cortometraje", 2, 4, 7, 300));
+function obtienePresetsJson(nombre, personaje, secundario, fondo, minAnimacion) {
+    presets.push(new PresetAnimacion(nombre, personaje, secundario, fondo, minAnimacion));
+}
+
+$.ajax({
+    url: "js/presets.json",
+    method: "GET",
+    dataType: "JSON",
+    success: function (data, status, jqXHR) {
+        data.forEach(function (i) {
+            obtienePresetsJson(i.nombre, i.numPersonajes, i.numSecundarios, i.numFondos, i.precioMinuto)
+        });
+    },
+    error: function (jqXHR, status, error) {
+        console.log("Error al leer los Presets");
+    }
+});
+
+
+$.ajax({
+    url: "https://criptoya.com/api/dolar",
+    method: "GET",
+    dataType: "JSON",
+    success: function (data, status, jqXHR) {
+        cotizacionDolarHoy = data.oficial;
+    },
+    error: function (jqXHR, status, error) {
+        console.log("Error Cotizacion");
+        cotizacionDolarHoy = 95;
+    }
+});
 
 const presupuestoForm = document.querySelector('#presupuesto-form');
 const inputNombre = document.querySelector('#inputNombre');
@@ -467,7 +485,7 @@ function publicaPresupuestoHTML() {
         filaFondos.classList.remove("hidden");
         filaMinutos.innerHTML = armaFilasPresupuesto(`Animación Video – Duración: ${duracionFormatoHora}`, "", `${totalMinPesos} $  `);
         filaMinutos.classList.remove("hidden");
-        filaTotal.innerHTML = armaFilasPresupuesto("", "Total", `${brutoAnimPesos} $  `);
+        filaTotal.innerHTML = armaFilasPresupuesto("", "Total", `${precioMasIva} $  `);
         filaTotal.classList.remove("hidden");
 
         filaSubtotal.innerHTML = armaFilasPresupuesto("", "SubTotal", `${brutoAnimPesos} $  `);;
