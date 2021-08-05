@@ -73,9 +73,9 @@ let cantidadSecundarios;
 let cantidadFondos;
 let tecnicaIngresada;
 let estiloArteIngresado;
-let precioPersonajeBase;
-let precioSecundarioBase;
-let precioFondoBase;
+let precioPersonajeBase = 50;
+let precioSecundarioBase = 35;
+let precioFondoBase = 35;
 let tarifaCliente;
 let tarifaTecnica;
 let cotizacionDolarHoy;
@@ -89,6 +89,7 @@ let totalFondos;
 let brutoAnimDolar;
 let brutoAnimPesos;
 let precioMasIva;
+let precioCapituloSerie;
 const presets = [];
 
 function obtienePresetsJson(nombre, personaje, secundario, fondo, minAnimacion) {
@@ -116,6 +117,7 @@ $.ajax({
     dataType: "JSON",
     success: function (data, status, jqXHR) {
         cotizacionDolarHoy = data.oficial;
+        console.log(data.oficial)
     },
     error: function (jqXHR, status, error) {
         console.log("Error Cotizacion");
@@ -140,6 +142,7 @@ const preguntasSerie = document.querySelectorAll('.preguntasSerie');
 const inputRecurrentes = document.querySelector('#personajesRecurrentes');
 const inputCapitulos = document.querySelector('#cantCapitulos');
 const botonImprimir = document.querySelector('.print');
+const presupuestoDiv = document.querySelector(".presupuestoFinal");
 const datosProyecto = document.querySelector('.datosProyecto');
 const filaProtagonistas = document.querySelector('.filaProtas');
 const filaSecundarios = document.querySelector('.filaSecund');
@@ -149,7 +152,7 @@ const filaGuion = document.querySelector('.filaGuion');
 const filaSubtotal = document.querySelector('.filaSubtotal');
 const filaIva = document.querySelector('.filaIva');
 const filaTotal = document.querySelector('.filaTotal');
-
+const mensajeSerie = document.querySelector('.mensajeSerie');
 
 //Event Listeners
 presupuestoForm.addEventListener("submit", cotizaAnimacion);
@@ -198,9 +201,9 @@ function defineTarifaCliente(cliente) {
     if (tarifaBase) {
         tarifaDecidida = 1;
     } else if (tarifaMedia) {
-        tarifaDecidida = 1.5;
-    } else if (tarifaAlta) {
         tarifaDecidida = 2;
+    } else if (tarifaAlta) {
+        tarifaDecidida = 3;
     } else {
         alert("Error. Ingrese Tipo")
     }
@@ -216,9 +219,9 @@ function defineTarifaTecnica(tecnica) {
     if (tarifaBase) {
         tarifaDecidida = 1;
     } else if (tarifaMedia) {
-        tarifaDecidida = 1.5;
-    } else if (tarifaAlta) {
         tarifaDecidida = 2;
+    } else if (tarifaAlta) {
+        tarifaDecidida = 3;
     } else {
         alert("Error. Ingrese Tipo")
     }
@@ -335,7 +338,7 @@ function seteaPredeterminados(preset) {
         inputSecundarios.value = secundarios;
         inputFondos.value = fondos;
         inputRecurrentes.value = inputPersonajes.value;
-        inputCapitulos.value = 2;
+        inputCapitulos.value = 5;
     }
     else {
         inputPersonajes.parentElement.classList.remove("hidden");
@@ -445,6 +448,8 @@ function cotizaAnimacion(e) {
     publicaPresupuestoHTML();
 
     incluyeGuionHTML();
+
+    publicaAdicionalSerie();
 }
 
 function listaDatosProyecto() {
@@ -467,8 +472,7 @@ function armaFilasPresupuesto(descripcion, cantidad, precio) {
 }
 
 function publicaPresupuestoHTML() {
-    let divHidden;
-    divHidden = document.querySelector(".presupuestoFinal");
+
     datosProyecto.innerHTML = listaDatosProyecto();
     let ivaPesosSolo = multiplicar(brutoAnimPesos, .21).toFixed(0);
     let totalPersonajesPesos = conversionDolarPeso(totalPersonajes, cotizacionDolarHoy);
@@ -493,7 +497,7 @@ function publicaPresupuestoHTML() {
         filaIva.innerHTML = armaFilasPresupuesto("", "IVA (21%)", `${ivaPesosSolo} $  `);;
         filaIva.classList.remove("hidden");
 
-        divHidden.classList.remove("hidden");
+        presupuestoDiv.classList.remove("hidden");
         $('#modal-Presupuesto').modal('show');
     }
     else if (paisIngresado === "Argentina" && tipoClienteIngresado === "Particular") {
@@ -511,7 +515,7 @@ function publicaPresupuestoHTML() {
         filaSubtotal.classList.add("hidden");
         filaIva.classList.add("hidden");
 
-        divHidden.classList.remove("hidden");
+        presupuestoDiv.classList.remove("hidden");
         $('#modal-Presupuesto').modal('show');
     }
     else {
@@ -529,7 +533,7 @@ function publicaPresupuestoHTML() {
         filaSubtotal.classList.add("hidden");
         filaIva.classList.add("hidden");
 
-        divHidden.classList.remove("hidden");
+        presupuestoDiv.classList.remove("hidden");
         $('#modal-Presupuesto').modal('show');
     }
 };
@@ -549,13 +553,36 @@ function incluyeGuionHTML() {
     }
 }
 
-
-function imprimePresupuesto() {
-    imprimeDiv(document.querySelector(".imprimible"));
+function publicaAdicionalSerie() {
+    mensajeSerie.classList.add("hidden");
+    let precioCadaPersonaje = precioAssetsAjustado(precioPersonajeBase);
+    let precioCadaPersonajePesos = conversionDolarPeso(precioCadaPersonaje, cotizacionDolarHoy);
+    let secundarioPesos = conversionDolarPeso(totalSecundarios, cotizacionDolarHoy);
+    let personajesRepetidos = inputRecurrentes.value;
+    let precioCapituloSerie;
+    if (presetElegido.getNombrePreset === "Serie Narrativa" && paisIngresado !== "Argentina" || presetElegido.getNombrePreset === "Musical Serie" && paisIngresado !== "Argentina") {
+        let personajesDescuento = multiplicar(precioCadaPersonaje, personajesRepetidos);
+        let secundarioDescuento = dividir(totalSecundarios, 2);
+        precioCapituloSerie = restar(brutoAnimDolar, sumar(personajesDescuento, secundarioDescuento));
+        mensajeSerie.innerHTML = `
+        <p>Tu serie tiene <span>${inputCapitulos.value} episodios</span>.</p> 
+        <p>A partir del segundo, el costo de cada espisodio es de aproximadamente <span>${precioCapituloSerie} u$s</span> </p>`;
+        mensajeSerie.classList.remove("hidden");
+    }
+    else if (presetElegido.getNombrePreset === "Serie Narrativa" && paisIngresado === "Argentina" || presetElegido.getNombrePreset === "Musical Serie" && paisIngresado === "Argentina") {
+        let personajesDescuento = multiplicar(precioCadaPersonajePesos, personajesRepetidos);
+        let secundarioDescuento = dividir(secundarioPesos, 2);
+        precioCapituloSerie = restar(brutoAnimPesos, sumar(personajesDescuento, secundarioDescuento));
+        mensajeSerie.innerHTML = `
+        <p>Tu serie tiene <span>${inputCapitulos.value} episodios</span>.</p> 
+        <p>A partir del segundo, el costo de cada episodios es de aproximadamente <span>${precioCapituloSerie} $</span> </p>`;
+        mensajeSerie.classList.remove("hidden");
+    }
 }
 
-function imprimeDiv(divImprimible) {
-    var domClonado = divImprimible.cloneNode(true);
+function imprimePresupuesto() {
+    let divImprimible = document.querySelector(".imprimible");
+    let domClonado = divImprimible.cloneNode(true);
 
     var $printSection = document.querySelector("#paraImprimir");
 

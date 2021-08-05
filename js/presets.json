@@ -25,14 +25,14 @@
         "numPersonajes": 1,
         "numSecundarios": 0,
         "numFondos": 0,
-        "precioMinuto": 150
+        "precioMinuto": 200
     },
     {
         "nombre": "Escena Animada",
         "numPersonajes": 1,
         "numSecundarios": 0,
         "numFondos": 1,
-        "precioMinuto": 200
+        "precioMinuto": 300
     },
     {
         "nombre": "Explicativo Simple",
@@ -74,20 +74,20 @@
         "numPersonajes": 2,
         "numSecundarios": 2,
         "numFondos": 5,
-        "precioMinuto": 200
+        "precioMinuto": 300
     },
     {
         "nombre": "Serie Narrativa",
         "numPersonajes": 4,
         "numSecundarios": 4,
         "numFondos": 5,
-        "precioMinuto": 200
+        "precioMinuto": 300
     },
     {
         "nombre": "Cortometraje",
         "numPersonajes": 2,
         "numSecundarios": 4,
         "numFondos": 7,
-        "precioMinuto": 300
+        "precioMinuto": 400
     }
 ]

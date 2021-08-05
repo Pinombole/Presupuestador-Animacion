@@ -628,11 +628,11 @@ body {
     color: #090411;
     background-color: #FFF;
     padding: 2em; }
-    #contacto #modal-Presupuesto .presupuestoFinal .datosProyecto, #presupuesto #modal-Presupuesto .presupuestoFinal .datosProyecto {
+    #contacto #modal-Presupuesto .presupuestoFinal .datosProyecto, #contacto #modal-Presupuesto .presupuestoFinal .mensajeSerie, #presupuesto #modal-Presupuesto .presupuestoFinal .datosProyecto, #presupuesto #modal-Presupuesto .presupuestoFinal .mensajeSerie {
       font-size: .8em;
       line-height: 1.2;
       margin: .5em; }
-      #contacto #modal-Presupuesto .presupuestoFinal .datosProyecto span, #presupuesto #modal-Presupuesto .presupuestoFinal .datosProyecto span {
+      #contacto #modal-Presupuesto .presupuestoFinal .datosProyecto span, #contacto #modal-Presupuesto .presupuestoFinal .mensajeSerie span, #presupuesto #modal-Presupuesto .presupuestoFinal .datosProyecto span, #presupuesto #modal-Presupuesto .presupuestoFinal .mensajeSerie span {
         font-weight: 700; }
     #contacto #modal-Presupuesto .presupuestoFinal .headerTabla, #presupuesto #modal-Presupuesto .presupuestoFinal .headerTabla {
       font-size: 1.1em;
